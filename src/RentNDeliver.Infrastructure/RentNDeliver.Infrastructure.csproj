@@ -7,11 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Persistence\Abstractions\" />
       <Folder Include="Services\Messaging\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\RentNDeliver.Domain\RentNDeliver.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +21,10 @@
 
     <ItemGroup>
       <None Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RentNDeliver.Domain\RentNDeliver.Domain.csproj" />
     </ItemGroup>
 
 </Project>

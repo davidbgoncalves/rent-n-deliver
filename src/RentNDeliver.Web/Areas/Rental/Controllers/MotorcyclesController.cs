@@ -1,14 +1,16 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
 
 namespace RentNDeliver.Web.Areas.Rental.Controllers
 {
+    [Area("Rental")]
     public class MotorcyclesController : Controller
     {
         // GET: MotorcyclesController
         public ActionResult Index()
         {
-            return View();
+            var list = new List<Motorcycle>();
+            return View(list);
         }
 
         // GET: MotorcyclesController/Details/5

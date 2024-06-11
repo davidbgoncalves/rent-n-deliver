@@ -7,11 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.3.0" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Abstractions\Data\" />
       <Folder Include="Abstractions\Messaging\" />
       <Folder Include="Motorcycle\Commands\" />

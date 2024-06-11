@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\Rental\Models\" />
       <Folder Include="Areas\Rental\Views\Home\" />
       <Folder Include="Areas\Delivery\Data\" />
       <Folder Include="Areas\Delivery\Models\" />
@@ -15,14 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.3.0" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\RentNDeliver.Application\RentNDeliver.Application.csproj" />
-      <ProjectReference Include="..\RentNDeliver.Domain\RentNDeliver.Domain.csproj" />
       <ProjectReference Include="..\RentNDeliver.Infrastructure\RentNDeliver.Infrastructure.csproj" />
     </ItemGroup>
 

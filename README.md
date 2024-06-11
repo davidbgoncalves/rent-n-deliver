@@ -6,15 +6,15 @@ Aplicação para gerenciar aluguel de motos e entregadores.
 ## Tecnologias Utilizadas
 - .NET Core
 - C#
-- PostgreSQL (ou MongoDB)
-- RabbitMQ (ou outro sistema de mensageria)
-- Amazon S3 (ou armazenamento local para imagens)
+- PostgreSQL
+- RabbitMQ 
+- Amazon S3 
 
 ## Requisitos
 - .NET SDK
 - Docker e Docker Compose
-- PostgreSQL (ou MongoDB)
-- RabbitMQ (ou outro sistema de mensageria)
+- PostgreSQL 
+- RabbitMQ 
 
 ## Configuração do Ambiente
 1. Clone o repositório:
