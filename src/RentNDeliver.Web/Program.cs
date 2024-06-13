@@ -1,11 +1,14 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using RentNDeliver.Web;
+using RentNDeliver.Web._keenthemes;
+using RentNDeliver.Web._keenthemes.libs;
+using Starterkit._keenthemes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+BuildTheme(builder);
 
 var app = builder.Build();
 
@@ -23,6 +26,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseThemeMiddleware();
 
 app.MapControllerRoute(
     name : "MyAreas",
@@ -34,3 +38,22 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+return;
+
+
+void BuildTheme(WebApplicationBuilder builder)
+{
+    builder.Services.AddScoped<IKTTheme, KTTheme>();
+    builder.Services.AddSingleton<IKTBootstrapBase, KTBootstrapBase>();
+
+    IConfiguration themeConfiguration = new ConfigurationBuilder()
+        .AddJsonFile("_keenthemes/config/themesettings.json")
+        .Build();
+
+    IConfiguration iconsConfiguration = new ConfigurationBuilder()
+        .AddJsonFile("_keenthemes/config/icons.json")
+        .Build();
+
+    KTThemeSettings.init(themeConfiguration);
+    KTIconsSettings.init(iconsConfiguration);
+}

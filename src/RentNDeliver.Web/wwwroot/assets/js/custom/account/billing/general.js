@@ -1,0 +1,33 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "../src/demo1/js/custom/account/billing/general.js":
+/*!*********************************************************!*\
+  !*** ../src/demo1/js/custom/account/billing/general.js ***!
+  \*********************************************************/
+/***/ (() => {
+
+eval("\n\n// Class definition\nvar KTAccountBillingGeneral = function () {\n    // Private variables\n    var cancelSubscriptionButton;\n\n    // Private functions\n    var handlePlan = function () {\n        cancelSubscriptionButton.addEventListener('click', function (e) {\n            e.preventDefault();\n\n            swal.fire({\n                text: \"Are you sure you would like to cancel your subscription ?\",\n                icon: \"warning\",\n                buttonsStyling: false,\n                showDenyButton: true,\n                confirmButtonText: \"Yes\",\n                denyButtonText: 'No',\n                customClass: {\n                    confirmButton: \"btn btn-primary\",\n                    denyButton: \"btn btn-light-danger\"\n                }\n            }).then((result) => {\n                if (result.isConfirmed) {\n                    Swal.fire({\n                        text: 'Your subscription has been canceled.', \n                        icon: 'success',\n                        confirmButtonText: \"Ok\",\n                        buttonsStyling: false,\n                        customClass: {\n                            confirmButton: \"btn btn-light-primary\"\n                        }\n                    })\n                } \n            });\n        });\n    }\n\n    var handleCardDelete = function() {\n        KTUtil.on(document.body,  '[data-kt-billing-action=\"card-delete\"]', 'click', function(e) {\n            e.preventDefault();\n\n            var el = this;\n\n            swal.fire({\n                text: \"Are you sure you would like to delete selected card ?\",\n                icon: \"warning\",\n                buttonsStyling: false,\n                showDenyButton: true,\n                confirmButtonText: \"Yes\",\n                denyButtonText: 'No',\n                customClass: {\n                    confirmButton: \"btn btn-primary\",\n                    denyButton: \"btn btn-light-danger\"\n                }\n            }).then((result) => {\n                if (result.isConfirmed) {\n                    el.setAttribute('data-kt-indicator', 'on');            \n                    el.disabled = true;\n\n                    setTimeout(function() {\n                        Swal.fire({\n                            text: 'Your selected card has been successfully deleted', \n                            icon: 'success',\n                            confirmButtonText: \"Ok\",\n                            buttonsStyling: false,\n                            customClass: {\n                                confirmButton: \"btn btn-light-primary\"\n                            }\n                        }).then((result) => {\n                            el.closest('[data-kt-billing-element=\"card\"]').remove();\n                        });\n                    }, 2000);\n                } \n            });   \n        });\n    } \n\n    var handleAddressDelete = function() {\n        KTUtil.on(document.body,  '[data-kt-billing-action=\"address-delete\"]', 'click', function(e) {\n            e.preventDefault();\n\n            var el = this;\n\n            swal.fire({\n                text: \"Are you sure you would like to delete selected address ?\",\n                icon: \"warning\",\n                buttonsStyling: false,\n                showDenyButton: true,\n                confirmButtonText: \"Yes\",\n                denyButtonText: 'No',\n                customClass: {\n                    confirmButton: \"btn btn-primary\",\n                    denyButton: \"btn btn-light-danger\"\n                }\n            }).then((result) => {\n                if (result.isConfirmed) {\n                    el.setAttribute('data-kt-indicator', 'on');            \n                    el.disabled = true;\n\n                    setTimeout(function() {\n                        Swal.fire({\n                            text: 'Your selected address has been successfully deleted', \n                            icon: 'success',\n                            confirmButtonText: \"Ok\",\n                            buttonsStyling: false,\n                            customClass: {\n                                confirmButton: \"btn btn-light-primary\"\n                            }\n                        }).then((result) => {\n                            el.closest('[data-kt-billing-element=\"address\"]').remove();\n                        });\n                    }, 2000);\n                } \n            });   \n        });\n    }\n\n    // Public methods\n    return {\n        init: function () {            \n            cancelSubscriptionButton = document.querySelector('#kt_account_billing_cancel_subscription_btn');\n\n            if ( cancelSubscriptionButton ) {\n                handlePlan();\n            }            \n\n            handleCardDelete();\n            handleAddressDelete();\n        }\n    }\n}();\n\n// On document ready\nKTUtil.onDOMContentLoaded(function() {\n    KTAccountBillingGeneral.init();\n});\n\n\n//# sourceURL=webpack://keenthemes/../src/demo1/js/custom/account/billing/general.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["../src/demo1/js/custom/account/billing/general.js"]();
+/******/ 	
+/******/ })()
+;

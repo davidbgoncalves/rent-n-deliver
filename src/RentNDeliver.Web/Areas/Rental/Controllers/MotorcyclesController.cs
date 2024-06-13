@@ -10,6 +10,7 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
         public ActionResult Index()
         {
             var list = new List<Motorcycle>();
+            list.Add(new Motorcycle(Guid.NewGuid(), 2023, "Interceptor 650", "FSJ4I52", DateTime.Now, null));
             return View(list);
         }
 

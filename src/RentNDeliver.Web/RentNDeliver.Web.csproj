@@ -7,10 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\Rental\Views\Home\" />
       <Folder Include="Areas\Delivery\Data\" />
       <Folder Include="Areas\Delivery\Models\" />
-      <Folder Include="Areas\Delivery\Views\Home\" />
+      <Folder Include="Areas\Delivery\Views\DeliveryPeople\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +31,22 @@
 
     <ItemGroup>
       <None Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo31\plugins\keenicons\duotone\selection.json" />
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo31\plugins\keenicons\outline\selection.json" />
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo31\plugins\keenicons\solid\selection.json" />
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo30\plugins\keenicons\duotone\selection.json" />
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo30\plugins\keenicons\outline\selection.json" />
+      <_ContentIncludedByDefault Remove="_keenthemes\src\demo30\plugins\keenicons\solid\selection.json" />
+      <_ContentIncludedByDefault Remove="Views\Pages\Dashboards\Demo30\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Pages\System\Demo30\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Pages\System\Demo30\NotFound.cshtml" />
     </ItemGroup>
 
 </Project>
