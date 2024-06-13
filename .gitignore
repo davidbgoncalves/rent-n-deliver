@@ -28,3 +28,4 @@ bin/
 # IntelliJ
 .idea/
     
+/src/RentNDeliver.Web/_keenthemes/tools/node_modules/
