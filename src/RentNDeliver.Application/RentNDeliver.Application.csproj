@@ -7,11 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Abstractions\Data\" />
+      <Folder Include="Abstractions\Repositories\" />
       <Folder Include="Abstractions\Messaging\" />
       <Folder Include="Motorcycle\Commands\" />
       <Folder Include="Motorcycle\Events\" />
-      <Folder Include="Motorcycle\Queries\" />
     </ItemGroup>
 
     <ItemGroup>

@@ -18,10 +18,4 @@
       <None Remove="obj\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="CSharpFunctionalExtensions" Version="2.42.0" />
-      <PackageReference Include="FluentResults" Version="3.15.2" />
-      <PackageReference Include="MediatR" Version="12.3.0" />
-    </ItemGroup>
-
 </Project>

@@ -14,7 +14,7 @@ public abstract class AggregateRoot : EntityBase
         Id = id;
     }
     
-    private readonly List<IDomainEvent> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = [];
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     public void AddDomainEvent(IDomainEvent eventItem)
