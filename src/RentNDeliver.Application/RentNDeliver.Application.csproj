@@ -7,10 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Abstractions\Repositories\" />
       <Folder Include="Abstractions\Messaging\" />
-      <Folder Include="Motorcycle\Commands\" />
-      <Folder Include="Motorcycle\Events\" />
+      <Folder Include="Motorcycles\Commands\" />
+      <Folder Include="Motorcycles\Events\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +26,10 @@
 
     <ItemGroup>
       <None Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.3.0" />
     </ItemGroup>
 
 </Project>

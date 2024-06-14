@@ -1,7 +1,7 @@
 using RentNDeliver.Domain.Abstractions.Entities;
 using RentNDeliver.Domain.Abstractions.ErrorHandling;
 
-namespace RentNDeliver.Domain.Motorcycle;
+namespace RentNDeliver.Domain.Motorcycles;
 
 public sealed class Motorcycle : AggregateRoot
 {
@@ -23,6 +23,7 @@ public sealed class Motorcycle : AggregateRoot
 
     public static Result<Motorcycle> Create(int year, string model, string licensePlate)
     {
+        //In 1885 the first motorcycle in the world was manufactured.
         if (year < 1884)
             return Result<Motorcycle>.Failure("Year must be greater than 1885");
         

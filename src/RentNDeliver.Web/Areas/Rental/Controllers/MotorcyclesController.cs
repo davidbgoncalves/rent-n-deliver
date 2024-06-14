@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
 using RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
 
 namespace RentNDeliver.Web.Areas.Rental.Controllers
@@ -6,12 +8,22 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
     [Area("Rental")]
     public class MotorcyclesController : Controller
     {
-        // GET: MotorcyclesController
-        public ActionResult Index()
+        private readonly IMediator _mediator;
+
+        public MotorcyclesController(IMediator mediator)
         {
-            var list = new List<Motorcycle>();
-            list.Add(new Motorcycle(Guid.NewGuid(), 2023, "Interceptor 650", "FSJ4I52", DateTime.Now, null));
-            return View(list);
+            _mediator = mediator;
+        }
+        // GET: MotorcyclesController
+        public async Task<ActionResult> Index(string? licensePlate = null)
+        {
+            var motorcycleDtoList = await _mediator.Send(new GetMotorcycleListQuery(licensePlate));
+            if (motorcycleDtoList.Count == 0)
+            {
+                return View(Enumerable.Empty<Motorcycle>());
+            }
+            var motorcycleModelList = motorcycleDtoList.Select(dto => dto.ToModel());
+            return View(motorcycleModelList);
         }
 
         // GET: MotorcyclesController/Details/5

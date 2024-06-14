@@ -1,4 +1,4 @@
-using RentNDeliver.Domain.Motorcycle;
+using RentNDeliver.Domain.Motorcycles;
 
 namespace RentNDeliver.Domain.Tests.Motorcycle
 {

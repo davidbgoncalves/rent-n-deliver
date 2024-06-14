@@ -1,4 +1,4 @@
-namespace RentNDeliver.Domain.Tests.Motorcycle;
+namespace RentNDeliver.Domain.Tests.Motorcycles;
 
 public class MotorcycleTests
 {
@@ -11,7 +11,7 @@ public class MotorcycleTests
         string validLicensePlate = "XYZ1234";
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(validYear, validModel, validLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(validYear, validModel, validLicensePlate);
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -32,7 +32,7 @@ public class MotorcycleTests
         string validLicensePlate = "XYZ1234";
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(invalidYear, validModel, validLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(invalidYear, validModel, validLicensePlate);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -44,11 +44,11 @@ public class MotorcycleTests
     {
         // Arrange
         int validYear = 2020;
-        string invalidModel = null;
+        string invalidModel = null!;
         string validLicensePlate = "XYZ1234";
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(validYear, invalidModel, validLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(validYear, invalidModel, validLicensePlate);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -64,7 +64,7 @@ public class MotorcycleTests
         string validLicensePlate = "XYZ1234";
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(validYear, invalidModel, validLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(validYear, invalidModel, validLicensePlate);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -77,10 +77,10 @@ public class MotorcycleTests
         // Arrange
         int validYear = 2020;
         string validModel = "Harley-Davidson";
-        string invalidLicensePlate = null;
+        string invalidLicensePlate = null!;
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(validYear, validModel, invalidLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(validYear, validModel, invalidLicensePlate);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -96,7 +96,7 @@ public class MotorcycleTests
         string invalidLicensePlate = "";
 
         // Act
-        var result = Domain.Motorcycle.Motorcycle.Create(validYear, validModel, invalidLicensePlate);
+        var result = Domain.Motorcycles.Motorcycle.Create(validYear, validModel, invalidLicensePlate);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -107,7 +107,7 @@ public class MotorcycleTests
     public void PrivateConstructor_ShouldNotThrowException()
     {
         // Arrange & Act
-        var motorcycle = Activator.CreateInstance(typeof(Domain.Motorcycle.Motorcycle), nonPublic: true);
+        var motorcycle = Activator.CreateInstance(typeof(Domain.Motorcycles.Motorcycle), nonPublic: true);
 
         // Assert
         Assert.NotNull(motorcycle);

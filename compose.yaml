@@ -8,12 +8,30 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  server:
+  web-application:
     build:
       context: .
       target: final
     ports:
       - 8080:8080
+    depends_on:
+      postgres:
+        condition: service_started
+        
+  postgres:
+    image: postgres
+    container_name: rent-n-deliver-postgres-server
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "#123Mudar"
+      POSTGRES_DB: RentNDeliverDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+volumes:
+  postgres_data:
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

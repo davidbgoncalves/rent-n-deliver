@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using RentNDeliver.Domain.Motorcycles;
+using RentNDeliver.Infrastructure.Persistence;
+using RentNDeliver.Infrastructure.Persistence.Repositories;
 using RentNDeliver.Web;
 using RentNDeliver.Web._keenthemes;
 using RentNDeliver.Web._keenthemes.libs;
@@ -5,9 +9,7 @@ using Starterkit._keenthemes;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+ConfigureServices(builder);
 BuildTheme(builder);
 
 var app = builder.Build();
@@ -40,6 +42,20 @@ app.MapControllerRoute(
 app.Run();
 return;
 
+void ConfigureServices(WebApplicationBuilder builder)
+{
+    builder.Services.AddDbContext<RentNDeliverDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
+    //Register MediaR
+    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList.GetMotorcycleListQuery).Assembly));
+    
+    //Register Repositories
+    builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+    
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
+}
 
 void BuildTheme(WebApplicationBuilder builder)
 {
