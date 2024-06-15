@@ -1,30 +1,31 @@
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker Compose reference guide at
-# https://docs.docker.com/go/compose-spec-reference/
-
-# Here the instructions define your application as a service called "server".
-# This service is built from the Dockerfile in the current directory.
-# You can add other services your application may depend on here, such as a
-# database or a cache. For examples, see the Awesome Compose repository:
-# https://github.com/docker/awesome-compose
 services:
   web-application:
+    container_name: web_app
     build:
       context: .
       target: final
     ports:
       - 8080:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres_server;Database=RentNDeliverDb;Username=postgres;Password=#123Mudar
+      - RabbitMQ__HostName=rabbitmq_server
+      - RabbitMQ__UserName=rabbitmq
+      - RabbitMQ__Password=#123Mudar
+      - MongoDb__ConnectionString=mongodb://mongodb_server:27017
+      - MongoDb__DatabaseName=RentNDeliverDomainEventLogs
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
       rabbitmq:
-        condition: service_started
+        condition: service_healthy
       mongodb:
-        condition: service_started
+        condition: service_healthy
         
   postgres:
     image: postgres
-    container_name: rent-n-deliver-postgres-server
+    container_name: postgres_server
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "#123Mudar"
@@ -33,10 +34,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
         
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rent-n-deliver-rabbitmq
+    container_name: rabbitmq_server
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -44,16 +50,24 @@ services:
       RABBITMQ_DEFAULT_USER: "rabbitmq"
       RABBITMQ_DEFAULT_PASS: "#123Mudar"
     volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+     - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   
   mongodb:
-    image: mongo:latest
-    container_name: ren-n-deliver-mongodb
+    image: mongo
+    restart: always
+    container_name: mongodb_server
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
-      - mongodb_config:/data/configdb
+     - mongodb_data:/data/db
+     - mongodb_config:/data/configdb
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       
 volumes:
   postgres_data:

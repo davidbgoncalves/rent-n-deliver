@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace RentNDeliver.Infrastructure.Persistence.Repositories.DomainEventLogRepository;
@@ -7,10 +6,10 @@ public class MongoDbContext
 {
     private readonly IMongoDatabase _database;
 
-    public MongoDbContext(IConfiguration configuration)
+    public MongoDbContext(string connectionString, string databaseName)
     {
-        var client = new MongoClient(configuration.GetConnectionString("MongoDbConnection"));
-        _database = client.GetDatabase(configuration["MongoDbSettings:DatabaseName"]);
+        var client = new MongoClient(connectionString);
+        _database = client.GetDatabase(databaseName);
     }
 
     public IMongoCollection<MotorcycleCreatedEventLog> MotorcycleLogs => 

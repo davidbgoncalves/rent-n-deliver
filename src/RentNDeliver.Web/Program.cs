@@ -62,23 +62,33 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList.GetMotorcycleListQuery).Assembly));
     
     // Set up of RabbitMQ
+    var rabbitMqOptions = new RabbitMqOptions();
+    builder.Configuration.GetSection("RabbitMQ").Bind(rabbitMqOptions);
+    builder.Services.AddSingleton(rabbitMqOptions);
     builder.Services.AddSingleton<IConnectionFactory>(sp => new ConnectionFactory
     {
-        HostName = "localhost",
-        Port = 5672,
-        UserName = "rabbitmq",
-        Password = "#123Mudar"
+        HostName = rabbitMqOptions.HostName,
+        UserName = rabbitMqOptions.UserName,
+        Password = rabbitMqOptions.Password
     });
+
     
     // Register RabbitMQ Publisher
     builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
-    
-    // Register the RabbitMQ consumer as a hosted service
     builder.Services.AddHostedService<RabbitMqConsumer>();
     
     //Set up MongoDB
-    builder.Services.AddSingleton<MongoDbContext>();
+    var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
+    var mongoDatabaseName = builder.Configuration
+        .GetSection("MongoDbSettings")
+        .GetSection("DatabaseName")
+        .Value;
+    if (mongoConnectionString != null && mongoDatabaseName != null)
+            builder.Services.AddSingleton(new MongoDbContext(mongoConnectionString, mongoDatabaseName));
+    else
+        Console.WriteLine("MongoDbConnection is not available.");
     
+
     // Add services to the container.
     builder.Services.AddControllersWithViews();
 }
