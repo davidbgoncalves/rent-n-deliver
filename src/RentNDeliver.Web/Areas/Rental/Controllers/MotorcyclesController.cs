@@ -1,23 +1,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RentNDeliver.Application.Motorcycles.Commands.CreateMotorcycle;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
 using RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
 
 namespace RentNDeliver.Web.Areas.Rental.Controllers
 {
     [Area("Rental")]
-    public class MotorcyclesController : Controller
+    public class MotorcyclesController(IMediator mediator) : Controller
     {
-        private readonly IMediator _mediator;
-
-        public MotorcyclesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
         // GET: MotorcyclesController
         public async Task<ActionResult> Index(string? licensePlate = null)
         {
-            var motorcycleDtoList = await _mediator.Send(new GetMotorcycleListQuery(licensePlate));
+            var motorcycleDtoList = await mediator.Send(new GetMotorcycleListQuery(licensePlate));
             if (motorcycleDtoList.Count == 0)
             {
                 return View(Enumerable.Empty<Motorcycle>());
@@ -25,13 +20,7 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
             var motorcycleModelList = motorcycleDtoList.Select(dto => dto.ToModel());
             return View(motorcycleModelList);
         }
-
-        // GET: MotorcyclesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         // GET: MotorcyclesController/Create
         public ActionResult Create()
         {
@@ -41,16 +30,20 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
         // POST: MotorcyclesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Motorcycle motorcycleModel)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View("Create", motorcycleModel);
             }
-            catch
+            var result = await mediator.Send(new CreateMotorcycleCommand(motorcycleModel.Year, motorcycleModel.Model, motorcycleModel.LicensePlate));
+            if (!result.IsSuccess)
             {
-                return View();
+                ModelState.AddModelError("LicensePlate", result.Error);
+                return View("Create", motorcycleModel);
             }
+            
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: MotorcyclesController/Edit/5

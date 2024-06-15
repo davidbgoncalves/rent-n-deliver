@@ -9,7 +9,6 @@
     <ItemGroup>
       <Folder Include="Migrations\" />
       <Folder Include="Persistence\Abstractions\" />
-      <Folder Include="Services\Messaging\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\RentNDeliver.Application\RentNDeliver.Application.csproj" />
       <ProjectReference Include="..\RentNDeliver.Domain\RentNDeliver.Domain.csproj" />
     </ItemGroup>
 
@@ -34,7 +34,9 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="MongoDB.Driver" Version="2.26.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+      <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     </ItemGroup>
 
 </Project>

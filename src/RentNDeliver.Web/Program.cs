@@ -1,10 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
+using RentNDeliver.Application.Abstractions.Messaging;
+using RentNDeliver.Domain.Abstractions.Repositories;
 using RentNDeliver.Domain.Motorcycles;
 using RentNDeliver.Infrastructure.Persistence;
 using RentNDeliver.Infrastructure.Persistence.Repositories;
+using RentNDeliver.Infrastructure.Persistence.Repositories.DomainEventLogRepository;
+using RentNDeliver.Infrastructure.Persistence.Repositories.Motorcycles;
+using RentNDeliver.Infrastructure.Services.Messaging;
 using RentNDeliver.Web;
 using RentNDeliver.Web._keenthemes;
 using RentNDeliver.Web._keenthemes.libs;
+using RentNDeliver.Web.BackgroundServices;
 using Starterkit._keenthemes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,11 +54,30 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddDbContext<RentNDeliverDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     
+    //Register Repositories
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+    builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+    
     //Register MediaR
     builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList.GetMotorcycleListQuery).Assembly));
     
-    //Register Repositories
-    builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+    // Set up of RabbitMQ
+    builder.Services.AddSingleton<IConnectionFactory>(sp => new ConnectionFactory
+    {
+        HostName = "localhost",
+        Port = 5672,
+        UserName = "rabbitmq",
+        Password = "#123Mudar"
+    });
+    
+    // Register RabbitMQ Publisher
+    builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
+    
+    // Register the RabbitMQ consumer as a hosted service
+    builder.Services.AddHostedService<RabbitMqConsumer>();
+    
+    //Set up MongoDB
+    builder.Services.AddSingleton<MongoDbContext>();
     
     // Add services to the container.
     builder.Services.AddControllersWithViews();

@@ -17,6 +17,10 @@ services:
     depends_on:
       postgres:
         condition: service_started
+      rabbitmq:
+        condition: service_started
+      mongodb:
+        condition: service_started
         
   postgres:
     image: postgres
@@ -29,9 +33,33 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+        
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rent-n-deliver-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "#123Mudar"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+  
+  mongodb:
+    image: mongo:latest
+    container_name: ren-n-deliver-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
       
 volumes:
   postgres_data:
+  rabbitmq_data:
+  mongodb_data:
+  mongodb_config:
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

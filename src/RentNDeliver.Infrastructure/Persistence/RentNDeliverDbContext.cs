@@ -16,11 +16,6 @@ public class RentNDeliverDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.Entity<Motorcycle>(entity =>
-        {
-            entity.HasIndex(m => m.LicensePlate).IsUnique();
-        });
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RentNDeliverDbContext).Assembly);
     }
 }

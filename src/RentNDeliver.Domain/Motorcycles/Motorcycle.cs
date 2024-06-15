@@ -13,6 +13,8 @@ public sealed class Motorcycle : AggregateRoot
         UpdateAt = upDateAt;
         CreatedAt = createdAt;
         IsDeleted = isDeleted;
+        
+        AddDomainEvent(new MotorcycleCreatedEvent(Id, Year));
     }
 
 #pragma warning disable CS8618 // this is needed for the ORM for serializing Value Objects
@@ -32,7 +34,7 @@ public sealed class Motorcycle : AggregateRoot
         
         if(string.IsNullOrWhiteSpace(licensePlate))
             return Result<Motorcycle>.Failure("License Plate cannot be null or empty");
-
+        
         return Result<Motorcycle>.Success(new Motorcycle(year, model, licensePlate, DateTime.UtcNow, null));
     }
 
