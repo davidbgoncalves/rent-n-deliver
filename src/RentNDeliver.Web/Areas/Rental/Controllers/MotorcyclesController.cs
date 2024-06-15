@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentNDeliver.Application.Motorcycles.Commands.CreateMotorcycle;
+using RentNDeliver.Application.Motorcycles.Commands.UpdateMotorcycle;
+using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleById;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
 using RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
 
@@ -17,20 +19,20 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
             {
                 return View(Enumerable.Empty<Motorcycle>());
             }
-            var motorcycleModelList = motorcycleDtoList.Select(dto => dto.ToModel());
+            var motorcycleModelList = motorcycleDtoList.Select(dto => dto.ToMotorcycleModel());
             return View(motorcycleModelList);
         }
         
         // GET: MotorcyclesController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new CreateMotorcycle());
         }
 
         // POST: MotorcyclesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Motorcycle motorcycleModel)
+        public async Task<ActionResult> Create(CreateMotorcycle motorcycleModel)
         {
             if (!ModelState.IsValid)
             {
@@ -47,32 +49,31 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
         }
 
         // GET: MotorcyclesController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            var motorcycleDto = await mediator.Send(new GetMotorcycleByIdQuery(id));
+            return motorcycleDto != null ? View(motorcycleDto.ToEditMotorcycleModel()) : View();
         }
 
         // POST: MotorcyclesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(Guid id, EditMotorcycle motorcycleModel)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View("Edit", motorcycleModel);
             }
-            catch
+            var result = await mediator.Send(new UpdateMotorcycleCommand(motorcycleModel.Id, motorcycleModel.LicensePlate));
+            if (!result.IsSuccess)
             {
-                return View();
+                ModelState.AddModelError("LicensePlate", result.Error);
+                return View("Edit", motorcycleModel);
             }
+            
+            return RedirectToAction(nameof(Index));
         }
-
-        // GET: MotorcyclesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
+        
         // POST: MotorcyclesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

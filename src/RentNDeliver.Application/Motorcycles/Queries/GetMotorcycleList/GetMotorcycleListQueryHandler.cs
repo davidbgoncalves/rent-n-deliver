@@ -4,23 +4,16 @@ using ArgumentNullException = System.ArgumentNullException;
 
 namespace RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
 
-public class GetMotorcycleListQueryHandler : IQueryHandler<GetMotorcycleListQuery, List<MotorcycleListItemDto>>
+public class GetMotorcycleListQueryHandler(IMotorcycleRepository motorcycleRepository)
+    : IQueryHandler<GetMotorcycleListQuery, List<MotorcycleListItemDto>>
 {
-    private readonly IMotorcycleRepository _motorcycleRepository;
-
-    public GetMotorcycleListQueryHandler(IMotorcycleRepository motorcycleRepository)
-    {
-        _motorcycleRepository = motorcycleRepository;
-    }
-    
     public async Task<List<MotorcycleListItemDto>> Handle(GetMotorcycleListQuery request, CancellationToken cancellationToken)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        ArgumentNullException.ThrowIfNull(request);
 
         var motorcyclesList = !string.IsNullOrWhiteSpace(request.LicensePlace)
-            ? await _motorcycleRepository.GetListByLicensePlateAsync(request.LicensePlace, cancellationToken)
-            : await _motorcycleRepository.GetAll(cancellationToken);
+            ? await motorcycleRepository.GetListByLicensePlateAsync(request.LicensePlace, cancellationToken)
+            : await motorcycleRepository.GetAll(cancellationToken);
 
         var motorcycleListItemDtos = motorcyclesList
             .Select(motorcycle => new MotorcycleListItemDto(

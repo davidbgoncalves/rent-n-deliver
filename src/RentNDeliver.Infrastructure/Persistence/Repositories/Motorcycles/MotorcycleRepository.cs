@@ -15,10 +15,10 @@ public class MotorcycleRepository(RentNDeliverDbContext context)
             .ToListAsync(cancellationToken: cancellationToken);
     }
 
-    public Task<bool> CheckIfExistsByLicensePlate(string licensePlate, CancellationToken cancellationToken)
+    public Task<Motorcycle?> GetByLicensePlateAsync(string licensePlate, CancellationToken cancellationToken)
     {
         return _context.Motorcycles
-            .AnyAsync(x => x.LicensePlate == licensePlate, 
-                cancellationToken: cancellationToken);
+            .Where(x => x.LicensePlate == licensePlate)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }

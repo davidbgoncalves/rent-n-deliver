@@ -51,6 +51,7 @@
       <_ContentIncludedByDefault Remove="Views\Pages\Dashboards\Demo30\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Pages\System\Demo30\Error.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Pages\System\Demo30\NotFound.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
     </ItemGroup>
 
 </Project>

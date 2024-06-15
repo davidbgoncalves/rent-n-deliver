@@ -11,11 +11,6 @@
 	// Global vendors and javascript files
 	KTTheme.AddVendor("datatables");
 	KTTheme.AddJavascriptFile("js/widgets.bundle.js");
-	KTTheme.AddJavascriptFile("js/custom/apps/chat/chat.js");
-	KTTheme.AddJavascriptFile("js/custom/utilities/modals/upgrade-plan.js");
-	KTTheme.AddJavascriptFile("js/custom/utilities/modals/create-app.js");
-	KTTheme.AddJavascriptFile("js/custom/utilities/modals/users-search.js");
-	KTTheme.AddJavascriptFile("js/custom/utilities/modals/new-target.js");
 }
 
 <!--begin::Root-->
@@ -26,23 +21,7 @@
 		<!--begin::Wrapper-->
 		<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
 			<!--begin::Main-->
-			<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-				<!--begin::Content wrapper-->
-				<div class="d-flex flex-column flex-column-fluid">
-					@* <partial name="Partials/HeaderLayout/_Toolbar.cshtml" /> *@
-					<!--begin::Content-->
-                    <div id="kt_app_content" class="app-content flex-column-fluid">
-                    	<!--begin::Content container-->
-                    	<div id="kt_app_content_container" class="app-container container-xxl">
-                    		@RenderBody()
-                    	</div>
-                    	<!--end::Content container-->
-                    </div>
-                    <!--end::Content-->
-				</div>
-				<!--end::Content wrapper-->
-				<partial name="Partials/HeaderLayout/_Footer.cshtml" />
-			</div>
+			@RenderBody()
 			<!--end:::Main-->
 		</div>
 		<!--end::Wrapper-->

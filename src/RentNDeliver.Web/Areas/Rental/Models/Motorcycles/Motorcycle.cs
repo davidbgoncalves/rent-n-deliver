@@ -7,22 +7,23 @@ public class Motorcycle
 {
     public Motorcycle()
     {
-        
+        Year = DateTime.UtcNow.Year;
     } 
     
-    public Motorcycle(Guid Id, int Year, string Model, string LicensePlate, DateTime CreatedAt, DateTime? UpdatedAt)
+    public Motorcycle(Guid id, int year, string model, string licensePlate, DateTime createdAt, DateTime? updatedAt)
     {
-        this.Id = Id;
-        this.Year = Year;
-        this.Model = Model;
-        this.LicensePlate = LicensePlate;
-        this.CreatedAt = CreatedAt;
-        this.UpdatedAt = UpdatedAt;
+        Id = id;
+        Year = year;
+        Model = model;
+        LicensePlate = licensePlate;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
     }
 
     public Guid Id { get; init; }
 
-    [Required] [Range(1885, 3000)] public int Year { get; init; }
+    [Required] [Range(1885, 3000)] 
+    public int Year { get; init; }
     
     [Required]
     [StringLength(50)]
@@ -39,7 +40,7 @@ public class Motorcycle
 
 public static class MotorcycleMappingExtensions
 {
-    public static Motorcycle ToModel(this MotorcycleListItemDto dto)
+    public static Motorcycle ToMotorcycleModel(this MotorcycleListItemDto dto)
     {
         return new Motorcycle(dto.Id, dto.Year, dto.Model, dto.LicensePlate, dto.CreatedDate, dto.LastUpdatedDate);
     }

@@ -38,6 +38,17 @@ public sealed class Motorcycle : AggregateRoot
         return Result<Motorcycle>.Success(new Motorcycle(year, model, licensePlate, DateTime.UtcNow, null));
     }
 
+    public Result UpdateLicensePlate(string licensePlate)
+    {
+        if(string.IsNullOrWhiteSpace(licensePlate))
+            return Result.Failure("License Plate cannot be null or empty");
+        
+        LicensePlate = licensePlate;
+        
+        return Result.Success();
+    }
+    
+
     public int Year { get; private set; }
     public string Model { get; private set; }
     public string LicensePlate { get; private set; }

@@ -2,9 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    <!--begin::Vendor Stylesheets(used for this page only)-->
-    KTTheme.AddCssFile("/plugins/custom/datatables/datatables.bundle.css");
-    <!--end::Vendor Stylesheets-->
+    KTTheme.AddJavascriptFile("js/custom/rental/motorcycles/index.js");
 }
 
 <!--begin::Main-->
@@ -67,7 +65,7 @@
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
-                                <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-300px ps-13" placeholder="Search motorcycle by license plate" />
+                                <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-300px ps-13" placeholder="Search..." />
                             </div>
                             <!--end::Search-->
                         </div>
