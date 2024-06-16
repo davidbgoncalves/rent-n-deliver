@@ -30,7 +30,10 @@ public class UpdateMotorcycleCommandHandler(
             && motorcycleWithNewLicensePlate.Id != motorcycleEntity!.Id)
             return Result.Failure($"There is another Motorcycle registered with the License Plate: {request.LicensePlate}");
         
-        motorcycleEntity!.UpdateLicensePlate(request.LicensePlate);
+        var motorcycleUpdatedResult = motorcycleEntity!.UpdateLicensePlate(request.LicensePlate);
+        if (!motorcycleUpdatedResult.IsSuccess)
+            return Result.Failure(motorcycleUpdatedResult.Error);
+        
         await motorcycleRepository.UpdateAsync(motorcycleEntity, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         

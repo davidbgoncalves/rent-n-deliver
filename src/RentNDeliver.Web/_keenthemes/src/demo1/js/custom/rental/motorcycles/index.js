@@ -4,9 +4,6 @@ var KTUsersList = function () {
     // Define shared variables
     var table = document.getElementById('kt_table_users');
     var datatable;
-    var toolbarBase;
-    var toolbarSelected;
-    var selectedCount;
 
     // Private functions
     var initUserTable = function () {
@@ -39,7 +36,7 @@ var KTUsersList = function () {
         });
     }
     
-    // Delete subscirption
+    // Delete subscription
     var handleDeleteRows = () => {
         // Select all delete buttons
         const deleteButtons = table.querySelectorAll('[data-kt-users-table-filter="delete_row"]');
@@ -52,12 +49,13 @@ var KTUsersList = function () {
                 // Select parent row
                 const parent = e.target.closest('tr');
 
-                // Get user name
-                const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[1].innerText;
+                // Get user ID
+                const id = parent.querySelectorAll('td')[0].innerText;
+                const licensePlate = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + userName + "?",
+                    text: "Are you sure you want to delete " + licensePlate + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -69,24 +67,43 @@ var KTUsersList = function () {
                     }
                 }).then(function (result) {
                     if (result.value) {
-                        Swal.fire({
-                            text: "You have deleted " + userName + "!.",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
+                        // Perform AJAX request to delete the record
+                        $.ajax({
+                            url: '/Rental/Motorcycles/Delete/',
+                            type: 'POST',
+                            data: {
+                                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                                id: id
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    text: "You have deleted " + licensePlate + "!.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(function () {
+                                    // Remove current row
+                                    datatable.row($(parent)).remove().draw();
+                                });
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    text: licensePlate + " was not deleted.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
                             }
-                        }).then(function () {
-                            // Remove current row
-                            datatable.row($(parent)).remove().draw();
-                        }).then(function () {
-                            // Detect checked checkboxes
-                            toggleToolbars();
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: customerName + " was not deleted.",
+                            text: licensePlate + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -100,34 +117,6 @@ var KTUsersList = function () {
         });
     }
     
-    // Toggle toolbars
-    const toggleToolbars = () => {
-        // Select refreshed checkbox DOM elements 
-        const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
-
-        // Detect checkboxes state & count
-        let checkedState = false;
-        let count = 0;
-
-        // Count checked boxes
-        allCheckboxes.forEach(c => {
-            if (c.checked) {
-                checkedState = true;
-                count++;
-            }
-        });
-
-        // Toggle toolbars
-        if (checkedState) {
-            selectedCount.innerHTML = count;
-            toolbarBase.classList.add('d-none');
-            toolbarSelected.classList.remove('d-none');
-        } else {
-            toolbarBase.classList.remove('d-none');
-            toolbarSelected.classList.add('d-none');
-        }
-    }
-
     return {
         // Public functions  
         init: function () {

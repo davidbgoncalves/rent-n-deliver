@@ -12,8 +12,7 @@ public sealed class Motorcycle : AggregateRoot
         LicensePlate = licensePlate;
         UpdateAt = upDateAt;
         CreatedAt = createdAt;
-        IsDeleted = isDeleted;
-        
+       
         AddDomainEvent(new MotorcycleCreatedEvent(Id, Year));
     }
 
@@ -44,15 +43,14 @@ public sealed class Motorcycle : AggregateRoot
             return Result.Failure("License Plate cannot be null or empty");
         
         LicensePlate = licensePlate;
+        UpdateAt = DateTime.UtcNow;
         
         return Result.Success();
     }
     
-
     public int Year { get; private set; }
     public string Model { get; private set; }
     public string LicensePlate { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdateAt { get; private set; }
-    public bool IsDeleted { get; private set; }
 }

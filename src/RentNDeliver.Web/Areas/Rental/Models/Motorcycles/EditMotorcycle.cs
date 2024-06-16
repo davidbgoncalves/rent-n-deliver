@@ -5,6 +5,11 @@ namespace RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
 
 public class EditMotorcycle
 {
+    public EditMotorcycle()
+    {
+        
+    }
+    
    public EditMotorcycle(Guid id, int year, string model, string licensePlate)
     {
         Id = id;
@@ -15,12 +20,11 @@ public class EditMotorcycle
 
     public Guid Id { get; set; }
     public int Year { get; set; }
-    public string Model { get; set; }
+    public string Model { get; set; } = null!;
 
     [Required]
     [StringLength(7)]
-    public string LicensePlate { get; set; }
-    
+    public string LicensePlate { get; set; } = null!;
 }
 
 public static class EditMotorcycleMappingExtensions

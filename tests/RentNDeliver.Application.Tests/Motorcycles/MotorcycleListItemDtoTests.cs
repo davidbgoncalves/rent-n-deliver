@@ -1,24 +1,53 @@
-using System.Text.Json;
 using RentNDeliver.Application.Motorcycles;
 
-namespace RentNDeliver.Application.Tests.Motorcycles;
-
-public class MotorcycleListItemDtoTests
+namespace RentNDeliver.Application.Tests.Motorcycles
 {
-    [Fact]
-    public void SerializationTest()
+    public class MotorcycleListItemDtoTests
     {
-        var dto = new MotorcycleListItemDto(
-            Guid.NewGuid(),
-            "ABC1234",
-            "Honda CB500F",
-            2021,
-            DateTime.UtcNow,
-            null);
+        [Fact]
+        public void Constructor_ShouldInitializeProperties()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var licensePlate = "XYZ1234";
+            var model = "Harley-Davidson";
+            var year = 2020;
+            var createdDate = DateTime.UtcNow;
+            DateTime? lastUpdatedDate = DateTime.UtcNow.AddDays(1);
 
-        var json = JsonSerializer.Serialize(dto);
-        var deserializedDto = JsonSerializer.Deserialize<MotorcycleListItemDto>(json);
+            // Act
+            var dto = new MotorcycleListItemDto(id, licensePlate, model, year, createdDate, lastUpdatedDate);
 
-        Assert.Equal(dto, deserializedDto);
+            // Assert
+            Assert.Equal(id, dto.Id);
+            Assert.Equal(licensePlate, dto.LicensePlate);
+            Assert.Equal(model, dto.Model);
+            Assert.Equal(year, dto.Year);
+            Assert.Equal(createdDate, dto.CreatedDate);
+            Assert.Equal(lastUpdatedDate, dto.LastUpdatedDate);
+        }
+
+        [Fact]
+        public void Constructor_ShouldHandleNullLastUpdatedDate()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var licensePlate = "XYZ1234";
+            var model = "Harley-Davidson";
+            var year = 2020;
+            var createdDate = DateTime.UtcNow;
+            DateTime? lastUpdatedDate = null;
+
+            // Act
+            var dto = new MotorcycleListItemDto(id, licensePlate, model, year, createdDate, lastUpdatedDate);
+
+            // Assert
+            Assert.Equal(id, dto.Id);
+            Assert.Equal(licensePlate, dto.LicensePlate);
+            Assert.Equal(model, dto.Model);
+            Assert.Equal(year, dto.Year);
+            Assert.Equal(createdDate, dto.CreatedDate);
+            Assert.Null(dto.LastUpdatedDate);
+        }
     }
 }

@@ -2,7 +2,7 @@ using RentNDeliver.Domain.Motorcycles;
 using Moq;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
 
-namespace RentNDeliver.Application.Tests.Motorcycles.GetMotorcycleList;
+namespace RentNDeliver.Application.Tests.Motorcycles.Queries;
 
 public class GetMotorcycleListQueryHandlerTests
 {

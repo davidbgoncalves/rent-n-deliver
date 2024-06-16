@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentNDeliver.Application.Motorcycles.Commands.CreateMotorcycle;
+using RentNDeliver.Application.Motorcycles.Commands.DeleteMotorcycle;
 using RentNDeliver.Application.Motorcycles.Commands.UpdateMotorcycle;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleById;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
@@ -77,16 +78,16 @@ namespace RentNDeliver.Web.Areas.Rental.Controllers
         // POST: MotorcyclesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (id == Guid.Empty)
+                return BadRequest();
+
+            var commandResult = await mediator.Send(new DeleteMotorcycleCommand(id));
+            if (!commandResult.IsSuccess)
+                return BadRequest(commandResult.Error);
+            
+            return Ok();
         }
     }
 }

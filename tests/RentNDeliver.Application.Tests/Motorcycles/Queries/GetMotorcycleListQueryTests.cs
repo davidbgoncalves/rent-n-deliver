@@ -1,9 +1,6 @@
-namespace RentNDeliver.Application.Tests.Motorcycles.GetMotorcycleList;
-
-using System;
-using System.Collections.Generic;
 using RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList;
-using Xunit;
+
+namespace RentNDeliver.Application.Tests.Motorcycles.Queries;
 
 public class GetMotorcycleListQueryTests
 {

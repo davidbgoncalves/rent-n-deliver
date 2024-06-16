@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentNDeliver.Domain.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentNDeliver.Application.Tests", "tests\RentNDeliver.Application.Tests\RentNDeliver.Application.Tests.csproj", "{78600683-3621-4E04-989C-E8F9871CBBBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentNDeliver.Web.Tests", "tests\RentNDeliver.Web.Tests\RentNDeliver.Web.Tests.csproj", "{54FF46CD-EF16-4F29-BA69-58B336E33C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{78600683-3621-4E04-989C-E8F9871CBBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78600683-3621-4E04-989C-E8F9871CBBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78600683-3621-4E04-989C-E8F9871CBBBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54FF46CD-EF16-4F29-BA69-58B336E33C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54FF46CD-EF16-4F29-BA69-58B336E33C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54FF46CD-EF16-4F29-BA69-58B336E33C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54FF46CD-EF16-4F29-BA69-58B336E33C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{20FD8561-6C10-40D7-ACE4-3FF62C176EB6} = {A20DA6E8-050C-472B-B8C9-DFADF42C4433}
@@ -71,5 +77,6 @@ Global
 		{97CE58A8-6AD7-49E9-B2E4-2572337C577F} = {A20DA6E8-050C-472B-B8C9-DFADF42C4433}
 		{99F05B75-F3C3-4CC6-A970-31AC579E915E} = {3F2504E0-4F89-11D3-9A0C-0305E82C3301}
 		{78600683-3621-4E04-989C-E8F9871CBBBF} = {3F2504E0-4F89-11D3-9A0C-0305E82C3301}
+		{54FF46CD-EF16-4F29-BA69-58B336E33C79} = {3F2504E0-4F89-11D3-9A0C-0305E82C3301}
 	EndGlobalSection
 EndGlobal

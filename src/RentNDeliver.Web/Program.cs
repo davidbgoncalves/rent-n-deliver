@@ -38,8 +38,8 @@ app.UseAuthorization();
 app.UseThemeMiddleware();
 
 app.MapControllerRoute(
-    name : "MyAreas",
-    pattern : "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    name: "MyAreas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 );
 
 app.MapControllerRoute(
@@ -47,65 +47,69 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-return;
 
-void ConfigureServices(WebApplicationBuilder builder)
+
+public partial class Program
 {
-    builder.Services.AddDbContext<RentNDeliverDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-    
-    //Register Repositories
-    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-    builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
-    
-    //Register MediaR
-    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList.GetMotorcycleListQuery).Assembly));
-    
-    // Set up of RabbitMQ
-    var rabbitMqOptions = new RabbitMqOptions();
-    builder.Configuration.GetSection("RabbitMQ").Bind(rabbitMqOptions);
-    builder.Services.AddSingleton(rabbitMqOptions);
-    builder.Services.AddSingleton<IConnectionFactory>(sp => new ConnectionFactory
+    static void ConfigureServices(WebApplicationBuilder builder)
     {
-        HostName = rabbitMqOptions.HostName,
-        UserName = rabbitMqOptions.UserName,
-        Password = rabbitMqOptions.Password
-    });
+        builder.Services.AddDbContext<RentNDeliverDbContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-    
-    // Register RabbitMQ Publisher
-    builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
-    builder.Services.AddHostedService<RabbitMqConsumer>();
-    
-    //Set up MongoDB
-    var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
-    var mongoDatabaseName = builder.Configuration
-        .GetSection("MongoDbSettings")
-        .GetSection("DatabaseName")
-        .Value;
-    if (mongoConnectionString != null && mongoDatabaseName != null)
+        //Register Repositories
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+
+        //Register MediaR
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly,
+            typeof(RentNDeliver.Application.Motorcycles.Queries.GetMotorcycleList.GetMotorcycleListQuery).Assembly));
+
+        // Set up of RabbitMQ
+        var rabbitMqOptions = new RabbitMqOptions();
+        builder.Configuration.GetSection("RabbitMQ").Bind(rabbitMqOptions);
+        builder.Services.AddSingleton(rabbitMqOptions);
+        builder.Services.AddSingleton<IConnectionFactory>(sp => new ConnectionFactory
+        {
+            HostName = rabbitMqOptions.HostName,
+            UserName = rabbitMqOptions.UserName,
+            Password = rabbitMqOptions.Password
+        });
+
+
+        // Register RabbitMQ Publisher
+        builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
+        builder.Services.AddHostedService<RabbitMqConsumer>();
+
+        //Set up MongoDB
+        var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
+        var mongoDatabaseName = builder.Configuration
+            .GetSection("MongoDbSettings")
+            .GetSection("DatabaseName")
+            .Value;
+        if (mongoConnectionString != null && mongoDatabaseName != null)
             builder.Services.AddSingleton(new MongoDbContext(mongoConnectionString, mongoDatabaseName));
-    else
-        Console.WriteLine("MongoDbConnection is not available.");
-    
+        else
+            Console.WriteLine("MongoDbConnection is not available.");
 
-    // Add services to the container.
-    builder.Services.AddControllersWithViews();
-}
 
-void BuildTheme(WebApplicationBuilder builder)
-{
-    builder.Services.AddScoped<IKTTheme, KTTheme>();
-    builder.Services.AddSingleton<IKTBootstrapBase, KTBootstrapBase>();
+        // Add services to the container.
+        builder.Services.AddControllersWithViews();
+    }
 
-    IConfiguration themeConfiguration = new ConfigurationBuilder()
-        .AddJsonFile("_keenthemes/config/themesettings.json")
-        .Build();
+    static void BuildTheme(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IKTTheme, KTTheme>();
+        builder.Services.AddSingleton<IKTBootstrapBase, KTBootstrapBase>();
 
-    IConfiguration iconsConfiguration = new ConfigurationBuilder()
-        .AddJsonFile("_keenthemes/config/icons.json")
-        .Build();
+        IConfiguration themeConfiguration = new ConfigurationBuilder()
+            .AddJsonFile("_keenthemes/config/themesettings.json")
+            .Build();
 
-    KTThemeSettings.init(themeConfiguration);
-    KTIconsSettings.init(iconsConfiguration);
+        IConfiguration iconsConfiguration = new ConfigurationBuilder()
+            .AddJsonFile("_keenthemes/config/icons.json")
+            .Build();
+
+        KTThemeSettings.init(themeConfiguration);
+        KTIconsSettings.init(iconsConfiguration);
+    }
 }
