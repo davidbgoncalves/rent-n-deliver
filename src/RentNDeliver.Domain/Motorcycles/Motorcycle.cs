@@ -5,7 +5,7 @@ namespace RentNDeliver.Domain.Motorcycles;
 
 public sealed class Motorcycle : AggregateRoot
 {
-    private Motorcycle(int year, string model, string licensePlate, DateTime createdAt, DateTime? upDateAt, bool isDeleted = false) 
+    private Motorcycle(int year, string model, string licensePlate, DateTime createdAt, DateTime? upDateAt) 
     {
         Year = year;
         Model = model;
@@ -21,7 +21,13 @@ public sealed class Motorcycle : AggregateRoot
 #pragma warning restore CS8618
     {
     }
-
+    
+    public int Year { get; private set; }
+    public string Model { get; private set; }
+    public string LicensePlate { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime? UpdateAt { get; private set; }
+    
     public static Result<Motorcycle> Create(int year, string model, string licensePlate)
     {
         //In 1885 the first motorcycle in the world was manufactured.
@@ -47,10 +53,4 @@ public sealed class Motorcycle : AggregateRoot
         
         return Result.Success();
     }
-    
-    public int Year { get; private set; }
-    public string Model { get; private set; }
-    public string LicensePlate { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime? UpdateAt { get; private set; }
 }

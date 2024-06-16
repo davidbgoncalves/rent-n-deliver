@@ -5,59 +5,28 @@
 		<!--begin:Menu item-->
 		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
 			<!--begin:Menu link-->
-			<a asp-area="" asp-controller="Home" asp-action="Index" class="menu-link">
+			<a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
 				<span class="menu-title">Home</span>
 				<span class="menu-arrow d-lg-none"></span>
 			</a>
 			<!--end:Menu link-->
 		</div>
 		<!--end:Menu item-->
-		<!--begin:Menu item-->
-		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
 			<!--begin:Menu link-->
-			<span class="menu-link">
-				<span class="menu-title">Rental</span>
-				<span class="menu-arrow d-lg-none"></span>
-			</span>
+			<a class="menu-link" asp-area="Admin" asp-controller="Motorcycles" asp-action="Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+				<span class="menu-title">Motorcycles</span>
+			</a>
 			<!--end:Menu link-->
-			<!--begin:Menu sub-->
-			<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-				<!--begin:Menu item-->
-				<div class="menu-item">
-					<!--begin:Menu link-->
-					<a class="menu-link" asp-area="Rental" asp-controller="Motorcycles" asp-action="Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-						<span class="menu-icon">@Html.Raw(KTTheme.GetIcon("rocket", "fs-2"))</span>
-						<span class="menu-title">Motorcycles</span>
-					</a>
-					<!--end:Menu link-->
-				</div>
-				<!--end:Menu item-->
-			</div>
-			<!--end:Menu sub-->
 		</div>
 		<!--end:Menu item-->
-		<!--begin:Menu item-->
-		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+		<!--end:Menu item-->
+		<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
 			<!--begin:Menu link-->
-			<span class="menu-link">
-				<span class="menu-title">Deliver</span>
-				<span class="menu-arrow d-lg-none"></span>
-			</span>
+			<a class="menu-link" asp-area="Admin" asp-controller="DeliveryPeople" asp-action="Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+				<span class="menu-title">Delivery People</span>
+			</a>
 			<!--end:Menu link-->
-			<!--begin:Menu sub-->
-			<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-				<!--begin:Menu item-->
-				<div class="menu-item">
-					<!--begin:Menu link-->
-					<a class="menu-link" asp-area="Delivery" asp-controller="DeliveryPeople" asp-action="Index" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-						<span class="menu-icon">@Html.Raw(KTTheme.GetIcon("rocket", "fs-2"))</span>
-						<span class="menu-title">Delivery People</span>
-					</a>
-					<!--end:Menu link-->
-				</div>
-				<!--end:Menu item-->
-			</div>
-			<!--end:Menu sub-->
 		</div>
 		<!--end:Menu item-->
 	</div>

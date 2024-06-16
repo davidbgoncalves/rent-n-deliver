@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using RentNDeliver.Web.Areas.Rental.Models.Motorcycles;
+using RentNDeliver.Web.Areas.Admin.Models.Motorcycles;
 
 
 namespace RentNDeliver.Web.Tests.Areas.Rental

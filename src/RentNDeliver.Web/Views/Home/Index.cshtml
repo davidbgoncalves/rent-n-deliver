@@ -1,21 +1,190 @@
 ﻿@{
     ViewData["Title"] = "Home";
+    KTTheme.AddJavascriptFile("js/custom/home/index.js");
 }
 
-<br/>
-<br/>
-<!--begin::Top-->
-<div class="text-center mb-15">
-    <!--begin::Title-->
-    <h3 class="fs-2hx text-gray-900 mb-5">Welcome to the RentNDeliver Platform</h3>
-    <!--end::Title-->
-    <!--begin::Text-->
-    <div class="fs-5 text-muted fw-semibold">
-        <p>
-            This platform was written as part of job interview challenge.
-        </p> 
-        This main objective is to manage a company that offers Motorcycle rental and Delivery
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+<!--begin::Authentication - Multi-steps-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column stepper-multistep" id="kt_create_account_stepper">
+        <!--begin::Aside-->
+        <div class="d-flex flex-column flex-lg-row-auto w-lg-350px w-xl-500px">
+            <div class="d-flex flex-column position-lg-fixed top-0 bottom-0 w-lg-350px w-xl-500px scroll-y bgi-size-cover bgi-position-center" style="background-image: url(assets/media/misc/auth-bg.png)">
+                <!--begin::Header-->
+                <div class="d-flex flex-center py-10 py-lg-20 mt-lg-20">
+                    <!--begin::Logo-->
+                    <a href="/">
+                        <img alt="Logo" src="assets/media/logos/custom-1.png" class="h-70px" />
+                    </a>
+                    <!--end::Logo-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="d-flex flex-row-fluid justify-content-center p-10">
+                    <!--begin::Nav-->
+                    <div class="stepper-nav">
+                        <!--begin::Step 1-->
+                        <div class="stepper-item current" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon rounded-3">
+                                    <i class="ki-outline ki-check fs-2 stepper-check"></i>
+                                    <span class="stepper-number">1</span>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title fs-2">Who are you?</h3>
+                                    <div class="stepper-desc fw-normal">Select your account type</div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 1-->
+                        <!--begin::Step 2-->
+                        <div class="stepper-item" data-kt-stepper-element="nav">
+                            <!--begin::Wrapper-->
+                            <div class="stepper-wrapper">
+                                <!--begin::Icon-->
+                                <div class="stepper-icon rounded-3">
+                                    <i class="ki-outline ki-check fs-2 stepper-check"></i>
+                                    <span class="stepper-number">2</span>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Label-->
+                                <div class="stepper-label">
+                                    <h3 class="stepper-title fs-2">Enjoy</h3>
+                                    <div class="stepper-desc fw-normal">You will be redirected to your destination.</div>
+                                </div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Wrapper-->
+                            <!--begin::Line-->
+                            <div class="stepper-line h-40px"></div>
+                            <!--end::Line-->
+                        </div>
+                        <!--end::Step 2-->
+                    </div>
+                    <!--end::Nav-->
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="d-flex flex-center flex-wrap px-5 py-10">
+                </div>
+                <!--end::Footer-->
+            </div>
+        </div>
+        <!--begin::Aside-->
+        <!--begin::Body-->
+        <div class="d-flex flex-column flex-lg-row-fluid py-10">
+            <!--begin::Content-->
+            <div class="d-flex flex-center flex-column flex-column-fluid">
+                <!--begin::Wrapper-->
+                <div class="w-lg-650px w-xl-700px p-10 p-lg-15 mx-auto">
+                    <!--begin::Form-->
+                    <form class="my-auto pb-5" novalidate="novalidate" id="kt_create_account_form">
+                        <!--begin::Step 1-->
+                        <div class="current" data-kt-stepper-element="content">
+                            <!--begin::Wrapper-->
+                            <div class="w-100">
+                                <!--begin::Heading-->
+                                <div class="pb-10 pb-lg-15">
+                                    <!--begin::Title-->
+                                    <h2 class="fw-bold d-flex align-items-center text-gray-900">
+                                        Who are you?
+                                        <span class="ms-1" data-bs-toggle="tooltip" title="Are you a customer or a employee?">
+                                            <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                                        </span>
+                                    </h2>
+                                    <!--end::Title-->
+                                    <!--begin::Notice-->
+                                    <div class="text-muted fw-semibold fs-6">
+                                        Let us know if you are a customer or an employee to give you the right permission access.
+                                    </div>
+                                    <!--end::Notice-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Input group-->
+                                <div class="fv-row">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Option-->
+                                            <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal"/>
+                                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+                                                <i class="ki-outline ki-badge fs-3x me-5"></i>
+                                                <!--begin::Info-->
+                                                <span class="d-block fw-semibold text-start">
+                                                    <span class="text-gray-900 fw-bold d-block fs-4 mb-2">Customer</span>
+                                                    <span class="text-muted fw-semibold fs-6">If you need more info, please check it out</span>
+                                                </span>
+                                                <!--end::Info-->
+                                            </label>
+                                            <!--end::Option-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Option-->
+                                            <input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate"/>
+                                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
+                                                <i class="ki-outline ki-briefcase fs-3x me-5"></i>
+                                                <!--begin::Info-->
+                                                <span class="d-block fw-semibold text-start">
+                                                    <span class="text-gray-900 fw-bold d-block fs-4 mb-2">Employee</span>
+                                                    <span class="text-muted fw-semibold fs-6">Create corporate account to mane users</span>
+                                                </span>
+                                                <!--end::Info-->
+                                            </label>
+                                            <!--end::Option-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Step 1-->
+                        <!--begin::Actions-->
+                        <div class="d-flex flex-stack pt-15">
+                            <div class="mr-2">
+                                <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                    <i class="ki-outline ki-arrow-left fs-4 me-1"></i>Previous
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="submit">
+                                    <span class="indicator-label">
+                                        Submit
+                                        <i class="ki-outline ki-arrow-right fs-4 ms-2"></i>
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">
+                                    Continue
+                                    <i class="ki-outline ki-arrow-right fs-4 ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Body-->
     </div>
-    <!--end::Text-->
+<!--end::Authentication - Multi-steps-->
 </div>
-<!--end::Top-->
