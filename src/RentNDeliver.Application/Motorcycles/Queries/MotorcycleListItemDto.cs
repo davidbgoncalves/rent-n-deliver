@@ -1,6 +1,6 @@
 using RentNDeliver.Domain.Motorcycles;
 
-namespace RentNDeliver.Application.Motorcycles;
+namespace RentNDeliver.Application.Motorcycles.Queries;
 
 public class MotorcycleListItemDto(
     Guid Id, string 

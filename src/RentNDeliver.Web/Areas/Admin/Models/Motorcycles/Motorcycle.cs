@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using RentNDeliver.Application.Motorcycles;
+using RentNDeliver.Application.Motorcycles.Queries;
 
 namespace RentNDeliver.Web.Areas.Admin.Models.Motorcycles;
 

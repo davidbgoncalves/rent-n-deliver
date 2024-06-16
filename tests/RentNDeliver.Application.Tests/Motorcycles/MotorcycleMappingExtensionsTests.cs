@@ -1,4 +1,4 @@
-using RentNDeliver.Application.Motorcycles;
+using RentNDeliver.Application.Motorcycles.Queries;
 using RentNDeliver.Domain.Motorcycles;
 
 namespace RentNDeliver.Application.Tests.Motorcycles
