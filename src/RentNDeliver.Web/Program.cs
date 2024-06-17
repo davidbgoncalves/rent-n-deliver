@@ -34,11 +34,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Adiciona a configuração de Data Protection com o novo caminho
-builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(@"/app/DataProtection-Keys"));
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

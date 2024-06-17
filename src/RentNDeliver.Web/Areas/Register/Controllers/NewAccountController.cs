@@ -21,14 +21,14 @@ namespace RentNDeliver.Web.Areas.Register.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Create", model);
+                return View(model);
             }
             var result = await mediator.Send(new CreateDeliveryPersonCommand(model.Name, model.Cnpj, model.BirthDate, model.CnhNumber, model.CnhType));
             
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError("Name", result.Error);
-                return View("Create", model);
+                return View(model);
             }
             
             HttpContext.Session.SetString(UserData.UserCNPJ, model.Cnpj);

@@ -15,8 +15,6 @@ services:
       - RabbitMQ__UserName=rabbitmq
       - RabbitMQ__Password=#123Mudar
       - MongoDbSettings__DatabaseName=RentNDeliverDomainEventLogs
-    volumes:
-      - keyring:/app/DataProtection-Keys
     depends_on:
       postgres:
         condition: service_healthy
