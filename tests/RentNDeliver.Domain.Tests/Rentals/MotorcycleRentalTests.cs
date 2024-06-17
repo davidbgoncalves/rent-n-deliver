@@ -96,7 +96,7 @@ namespace RentNDeliver.Domain.Tests.Rentals
                 motorcycleId,
                 deliveryPersonId,
                 rentalPlan,
-                expectedEndDate).Value;
+                expectedEndDate).Value!;
         }
     }
 }

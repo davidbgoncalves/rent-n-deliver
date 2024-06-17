@@ -132,7 +132,7 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var newCnhImageUrl = "http://example.com/cnh.jpg";
 
             // Act
-            deliveryPerson.SetCnhImageUrl(newCnhImageUrl);
+            deliveryPerson!.SetCnhImageUrl(newCnhImageUrl);
 
             // Assert
             Assert.Equal(newCnhImageUrl, deliveryPerson.CnhImageUrl);

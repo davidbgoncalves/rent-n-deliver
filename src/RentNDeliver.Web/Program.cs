@@ -2,11 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using RentNDeliver.Application.Abstractions.Messaging;
 using RentNDeliver.Domain.Abstractions.Repositories;
+using RentNDeliver.Domain.DeliveryPeople;
 using RentNDeliver.Domain.Motorcycles;
+using RentNDeliver.Domain.Rentals;
 using RentNDeliver.Infrastructure.Persistence;
 using RentNDeliver.Infrastructure.Persistence.Repositories;
+using RentNDeliver.Infrastructure.Persistence.Repositories.DeliveryPeople;
 using RentNDeliver.Infrastructure.Persistence.Repositories.DomainEventLogRepository;
 using RentNDeliver.Infrastructure.Persistence.Repositories.Motorcycles;
+using RentNDeliver.Infrastructure.Persistence.Repositories.Rentals;
 using RentNDeliver.Infrastructure.Services.Messaging;
 using RentNDeliver.Web;
 using RentNDeliver.Web._keenthemes;
@@ -59,6 +63,8 @@ public partial class Program
         //Register Repositories
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+        builder.Services.AddScoped<IMotorcycleRentalRepository, MotorcycleRentalRepository>();
+        builder.Services.AddScoped<IDeliveryPeopleRepository, DeliveryPeopleRepository>();
 
         //Register MediaR
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly,
@@ -90,8 +96,7 @@ public partial class Program
             builder.Services.AddSingleton(new MongoDbContext(mongoConnectionString, mongoDatabaseName));
         else
             Console.WriteLine("MongoDbConnection is not available.");
-
-
+        
         // Add services to the container.
         builder.Services.AddControllersWithViews();
     }

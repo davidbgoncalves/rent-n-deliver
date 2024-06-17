@@ -29,7 +29,7 @@ public class DeliveryPerson : AggregateRoot
     public string CnhType { get; private set; }
     public string? CnhImageUrl { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
 
     public void SetCnhImageUrl(string cnhImageUrl)
     {

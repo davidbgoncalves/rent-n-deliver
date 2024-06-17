@@ -27,7 +27,7 @@ public class MotorcycleRental : AggregateRoot
         StartDate = startDate;
         ExpectedEndDate = expectedEndDate;
         CreatedAt = createdAt;
-        SelectedRentalPlan = selectedRentalPlan;
+        RentalPlan = selectedRentalPlan;
     }
     
     public Guid MotorcycleId { get; private set; }
@@ -40,14 +40,14 @@ public class MotorcycleRental : AggregateRoot
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
+    public RentalPlan RentalPlan { get; }
     public Motorcycle? Motorcycle { get; set; }
     public DeliveryPerson? DeliveryPerson { get; set; }
-    public RentalPlan SelectedRentalPlan { get; private set; }
     
     public static Result<MotorcycleRental> Create(
         Guid motorcycleId, 
         Guid deliveryPersonId, 
-        RentalPlan selectedRentalPlan,
+        RentalPlan rentalPlan,
         DateTime expectedEndDate)
     {
         if(motorcycleId == Guid.Empty)
@@ -55,17 +55,17 @@ public class MotorcycleRental : AggregateRoot
         
         if(deliveryPersonId == Guid.Empty)
             return Result<MotorcycleRental>.Failure("DeliveryPersonId is required");
-        
+
         if(expectedEndDate == default)
             return Result<MotorcycleRental>.Failure("ExpectedEndDate is required");
         
         var createdAt = DateTime.UtcNow;
         var startDate = createdAt.Date.AddDays(1);
         
-        return Result<MotorcycleRental>.Success(new MotorcycleRental(motorcycleId, deliveryPersonId, selectedRentalPlan, startDate, expectedEndDate, createdAt));
+        return Result<MotorcycleRental>.Success(new MotorcycleRental(motorcycleId, deliveryPersonId, rentalPlan, startDate, expectedEndDate, createdAt));
     }
 
-    public Result Finish(DateTime endDate)
+    public Result<decimal> Finish(DateTime endDate)
     {
         bool isNeededToChargeApplyEarlyDeliveryFee = endDate.Date < ExpectedEndDate.Date;
         bool isNeededToChargeAdditionalDayFee = endDate.Date > ExpectedEndDate.Date;
@@ -77,29 +77,29 @@ public class MotorcycleRental : AggregateRoot
         if (isNeededToChargeApplyEarlyDeliveryFee)
         {
             var remainingDays = contractedDays - totalDays;
-            finalTotalCost = totalDays * SelectedRentalPlan.DayCost;
-            var totalAmountForRemainingDays = remainingDays * SelectedRentalPlan.DayCost;
-            if (SelectedRentalPlan.EarlyDeliveryFee > 0)
+            finalTotalCost = totalDays * RentalPlan.DayCost;
+            var totalAmountForRemainingDays = remainingDays * RentalPlan.DayCost;
+            if (RentalPlan.EarlyDeliveryFee > 0)
             {
-                var earlyDeliveryAmount = totalAmountForRemainingDays * (SelectedRentalPlan.EarlyDeliveryFee / 100);
+                var earlyDeliveryAmount = totalAmountForRemainingDays * (RentalPlan.EarlyDeliveryFee / 100);
                 finalTotalCost += earlyDeliveryAmount;    
             }
         }
         else if (isNeededToChargeAdditionalDayFee)
         {
-            finalTotalCost = contractedDays * SelectedRentalPlan.DayCost;
+            finalTotalCost = contractedDays * RentalPlan.DayCost;
             var additionalDays = totalDays - contractedDays;
-            var additionalCost = additionalDays * SelectedRentalPlan.AdditionalDayFee;
+            var additionalCost = additionalDays * RentalPlan.AdditionalDayFee;
             finalTotalCost += additionalCost;
         }
         else
         {
-            finalTotalCost = contractedDays * SelectedRentalPlan.DayCost;
+            finalTotalCost = contractedDays * RentalPlan.DayCost;
         }
 
         EndDate = endDate;
         TotalCost = finalTotalCost;
         UpdatedAt = DateTime.UtcNow;
-        return Result.Success();
+        return Result<decimal>.Success(TotalCost.Value);
     }
 }

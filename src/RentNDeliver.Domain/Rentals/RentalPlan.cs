@@ -1,12 +1,13 @@
 namespace RentNDeliver.Domain.Rentals;
 
-public class RentalPlan(Guid id, string name, int minimumNumberOfDays, decimal dayCost, decimal lateFee, decimal additionalDayFee)
+public class RentalPlan(Guid rentalPlanId, string name, int minimumNumberOfDays, decimal dayCost, decimal earlyDeliveryFee, decimal additionalDayFee)
 {
-    public Guid Id { get; private set; } = id;
+    public Guid RentalPlanId { get; private set; } = rentalPlanId;
+    
     public string Name { get; private set; } = name;
     public int MinimumNumberOfDays { get; private set; } = minimumNumberOfDays;
     public decimal DayCost { get; private set; } = dayCost;
-    public decimal EarlyDeliveryFee { get; private set; } = lateFee;
+    public decimal EarlyDeliveryFee { get; private set; } = earlyDeliveryFee;
     public decimal AdditionalDayFee { get; private set; } = additionalDayFee;
 
     public static List<RentalPlan> AvailablePlans()
