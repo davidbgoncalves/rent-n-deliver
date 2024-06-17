@@ -27,7 +27,7 @@ services:
       mongodb:
         condition: service_healthy
       minio:
-        condition: service_healthy
+        condition: service_started
         
   postgres:
     image: postgres
@@ -77,6 +77,7 @@ services:
       
   minio:
     image: minio/minio
+    container_name: minio_server
     ports:
       - "9000:9000"
       - "9001:9001"
