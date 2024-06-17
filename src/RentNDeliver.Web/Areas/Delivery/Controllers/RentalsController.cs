@@ -57,7 +57,9 @@ namespace RentNDeliver.Web.Areas.Delivery.Controllers
 
             if (!result.IsSuccess)
             {
-                ModelState.AddModelError("DeliveryPersonId", result.Error);
+                ViewBag.MotorcycleList = await GetMotorcycleSelectListItems();
+                ViewBag.RentalPlanList = await GetRentalPlansSelectListItems();
+                ModelState.AddModelError("", result.Error);
                 return View(model);
             }
             

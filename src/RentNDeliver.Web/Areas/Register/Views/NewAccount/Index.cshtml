@@ -34,7 +34,6 @@
                     <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
                         <!--begin::Form-->
                         <form class="form w-100" id="kt_sign_in_form" asp-area="Register" asp-controller="NewAccount" asp-action="Index" method="post">
-                            <div asp-validation-summary="ModelOnly"></div>
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
@@ -106,6 +105,9 @@
                                 </div>
                                 <!--end::Input-->
                             </div>
+                            <div class="form-group text-danger">
+                                <div asp-validation-summary="ModelOnly"></div>
+                            </div>
                             <!--end::Input group-->
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
@@ -113,12 +115,6 @@
                                     <!--begin::Indicator label-->
                                     <span class="indicator-label">Register</span>
                                     <!--end::Indicator label-->
-                                    <!--begin::Indicator progress-->
-                                    <span class="indicator-progress">
-                                        Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                                    <!--end::Indicator progress-->
                                 </button>
                             </div>
                             <!--end::Submit button-->

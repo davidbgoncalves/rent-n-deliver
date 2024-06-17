@@ -14,7 +14,7 @@ public class ReturnMotorcycle
         MotorcycleRentalId = motorcycleRentalId;
     }
 
-    [Required] public DateTime ReturnDate { get; init; } = DateTime.UtcNow;
+    [Required] public DateTime ReturnDate { get; init; } = DateTime.UtcNow.Date.AddDays(1);
     
     [Required]
     public Guid MotorcycleRentalId { get; set; }

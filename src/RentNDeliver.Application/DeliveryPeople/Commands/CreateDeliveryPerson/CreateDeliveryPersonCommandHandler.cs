@@ -22,7 +22,7 @@ public class CreateDeliveryPersonCommandHandler(
         if(verifyIfExistsWithSameCnpj != null)
             return Result.Failure("There is already a person registered with this CNPJ");
         
-        var verifyIfExistsWithSameCnhNumber = await deliveryPeopleRepository.GetByCnpjAsync(request.CnhNumber, cancellationToken);
+        var verifyIfExistsWithSameCnhNumber = await deliveryPeopleRepository.GetByCnhNumberAsync(request.CnhNumber, cancellationToken);
         if(verifyIfExistsWithSameCnhNumber != null)
             return Result.Failure("There is already a person registered with this CNH number");
 

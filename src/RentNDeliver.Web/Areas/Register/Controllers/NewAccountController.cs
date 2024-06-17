@@ -27,7 +27,7 @@ namespace RentNDeliver.Web.Areas.Register.Controllers
             
             if (!result.IsSuccess)
             {
-                ModelState.AddModelError("Name", result.Error);
+                ModelState.AddModelError("", result.Error);
                 return View(model);
             }
             

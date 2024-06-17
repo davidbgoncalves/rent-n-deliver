@@ -69,7 +69,7 @@ var KTUsersList = function () {
                     if (result.value) {
                         // Perform AJAX request to delete the record
                         $.ajax({
-                            url: '/Rental/Motorcycles/Delete/',
+                            url: '/Admin/Motorcycles/Delete/',
                             type: 'POST',
                             data: {
                                 __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),

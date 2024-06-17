@@ -48,7 +48,6 @@
     <!--begin::Content container-->
     <div id="kt_app_content_container" class="app-container container-xxl">
         <form asp-controller="Rentals" asp-action="Create" method="post" class="form d-flex flex-column flex-lg-row">
-            <div asp-validation-summary="ModelOnly"></div>
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                 <!--begin::General options-->
@@ -90,6 +89,9 @@
                             </div>
                         </div>
                         <!--end::Input group-->
+                        <div class="form-group text-danger">
+                            <div asp-validation-summary="ModelOnly"></div>
+                        </div>
                     </div>
                     <!--end::Card header-->
                 </div>

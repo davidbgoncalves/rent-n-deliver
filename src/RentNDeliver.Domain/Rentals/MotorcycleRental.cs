@@ -67,6 +67,12 @@ public class MotorcycleRental : AggregateRoot
 
     public Result<decimal> Finish(DateTime endDate)
     {
+        
+        if(endDate == DateTime.MinValue
+           || endDate < CreatedAt)
+            return Result<decimal>.Failure("End Date must be greater than or equal to Start Date");
+            
+        
         bool isNeededToChargeApplyEarlyDeliveryFee = endDate.Date < ExpectedEndDate.Date;
         bool isNeededToChargeAdditionalDayFee = endDate.Date > ExpectedEndDate.Date;
        
