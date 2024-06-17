@@ -22,4 +22,14 @@ public class MotorcycleRepository : Repository<Motorcycle>, IMotorcycleRepositor
             .Where(x => x.LicensePlate == licensePlate)
             .FirstOrDefaultAsync(cancellationToken);
     }
+
+    public async Task<List<Motorcycle>> GetAvailableForRentalAsync(CancellationToken cancellationToken)
+    {
+        var availableMotorcycles = await DbContext.Motorcycles
+            .Where(m => !DbContext.MotorcycleRentals
+                .Any(r => r.MotorcycleId == m.Id && r.EndDate == null))
+            .ToListAsync(cancellationToken);
+
+        return availableMotorcycles;
+    }
 }

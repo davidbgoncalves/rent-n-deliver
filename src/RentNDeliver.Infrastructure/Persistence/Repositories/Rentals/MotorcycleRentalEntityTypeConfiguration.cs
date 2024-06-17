@@ -9,6 +9,14 @@ public class MotorcycleRentalEntityTypeConfiguration: IEntityTypeConfiguration<M
     public void Configure(EntityTypeBuilder<MotorcycleRental> builder)
     {
         builder.HasKey(m => m.Id);
+
+        builder.HasOne(mr => mr.Motorcycle)
+            .WithMany()
+            .HasForeignKey(mr => mr.MotorcycleId);
+        
+        builder.HasOne(mr => mr.DeliveryPerson)
+            .WithMany()
+            .HasForeignKey(mr => mr.DeliveryPersonId);
         
         builder.OwnsOne(r => r.RentalPlan, rentalPlan =>
         {
