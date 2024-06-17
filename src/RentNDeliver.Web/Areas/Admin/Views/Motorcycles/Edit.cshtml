@@ -1,7 +1,7 @@
 @model RentNDeliver.Web.Areas.Admin.Models.Motorcycles.EditMotorcycle
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Motorcycle";
 }
 
 <!--begin::Content-->
@@ -19,7 +19,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="text-muted text-hover-primary">Home</a>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -28,7 +28,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Rental</li>
+                    <li class="breadcrumb-item text-muted">Admin</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -36,7 +36,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <a asp-area="Rental" asp-controller="Motorcycles" asp-action="Index" class="breadcrumb-item text-muted">Motorcycles</a>
+                    <a asp-area="Admin" asp-controller="Motorcycles" asp-action="Index" class="breadcrumb-item text-muted">Motorcycles</a>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -44,7 +44,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <a asp-area="Rental" asp-controller="Motorcycles" asp-action="Edit" class="breadcrumb-item text-muted">Edit Motorcycle</a>
+                    <a asp-area="Admin" asp-controller="Motorcycles" asp-action="Edit" class="breadcrumb-item text-muted">Edit Motorcycle</a>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->

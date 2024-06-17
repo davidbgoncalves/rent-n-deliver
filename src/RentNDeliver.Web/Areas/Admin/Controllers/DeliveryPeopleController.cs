@@ -1,19 +1,23 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RentNDeliver.Application.DeliveryPeople.Queries.GetDeliveryPeopleList;
+using RentNDeliver.Web.Areas.Admin.Models.DeliveryPeople;
 
 namespace RentNDeliver.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-public class DeliveryPeopleController : Controller
+public class DeliveryPeopleController(IMediator mediator)
+    : Controller
 {
-    private readonly ILogger<DeliveryPeopleController> _logger;
-
-    public DeliveryPeopleController(ILogger<DeliveryPeopleController> logger)
+    public async Task<IActionResult> Index()
     {
-        _logger = logger;
-    }
+        var deliveryPeopleDtoList = await mediator.Send(new GetDeliveryPeopleListQuery());
+        if (deliveryPeopleDtoList.Count == 0)
+        {
+            return View(Enumerable.Empty<DeliveryPerson>());
+        }
 
-    public IActionResult Index()
-    {
-        return View();
+        var deliveryPeopleModelList = deliveryPeopleDtoList.Select(x => x.ToModel());
+        return View(deliveryPeopleModelList);
     }
 }

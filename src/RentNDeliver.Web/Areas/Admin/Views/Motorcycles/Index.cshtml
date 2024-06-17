@@ -1,8 +1,8 @@
 @model IEnumerable<RentNDeliver.Web.Areas.Admin.Models.Motorcycles.Motorcycle>
 
 @{
-    ViewData["Title"] = "Index";
-    KTTheme.AddJavascriptFile("js/custom/rental/motorcycles/index.js");
+    ViewData["Title"] = "Motorcycles";
+    KTTheme.AddJavascriptFile("js/custom/admin/motorcycles/index.js");
 }
 
 <!--begin::Main-->
@@ -16,13 +16,13 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Motorcycle List</h1>
+                    <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Motorcycles List</h1>
                     <!--end::Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-muted text-hover-primary">Home</a>
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-muted text-hover-primary">Home</a>
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
@@ -31,7 +31,7 @@
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">Rental</li>
+                        <li class="breadcrumb-item text-muted">Admin</li>
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <a asp-area="Rental" asp-controller="Motorcycles" asp-action="Index" class="breadcrumb-item text-muted">Motorcycles</a>
+                        <a asp-area="Admin" asp-controller="Motorcycles" asp-action="Index" class="breadcrumb-item text-muted">Motorcycles</a>
                         <!--end::Item-->
                     </ul>
                     <!--end::Breadcrumb-->
@@ -75,7 +75,7 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                 <!--begin::Add user-->
-                                <a asp-area="Rental" asp-controller="Motorcycles" asp-action="Create" class="btn btn-primary">
+                                <a asp-area="Admin" asp-controller="Motorcycles" asp-action="Create" class="btn btn-primary">
                                     <i class="ki-duotone ki-plus fs-2"></i>
                                     Add Motorcycle
                                 </a>
