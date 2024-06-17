@@ -3,21 +3,22 @@ using RentNDeliver.Domain.Motorcycles;
 
 namespace RentNDeliver.Infrastructure.Persistence.Repositories.Motorcycles;
 
-public class MotorcycleRepository(RentNDeliverDbContext context)
-    : Repository<Motorcycle>(context), IMotorcycleRepository
+public class MotorcycleRepository : Repository<Motorcycle>, IMotorcycleRepository
 {
-    private readonly RentNDeliverDbContext _context = context;
-
+    public MotorcycleRepository(RentNDeliverDbContext dbContext) : base(dbContext)
+    {
+    }
+    
     public Task<List<Motorcycle>> GetListByLicensePlateAsync(string licensePlate, CancellationToken cancellationToken)
     {
-        return _context.Motorcycles
+        return DbContext.Motorcycles
             .Where(x => x.LicensePlate.Contains(licensePlate))
             .ToListAsync(cancellationToken: cancellationToken);
     }
 
     public Task<Motorcycle?> GetByLicensePlateAsync(string licensePlate, CancellationToken cancellationToken)
     {
-        return _context.Motorcycles
+        return DbContext.Motorcycles
             .Where(x => x.LicensePlate == licensePlate)
             .FirstOrDefaultAsync(cancellationToken);
     }

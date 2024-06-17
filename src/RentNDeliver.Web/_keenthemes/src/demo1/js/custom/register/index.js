@@ -14,21 +14,14 @@ var KTSigninGeneral = function () {
             form,
             {
                 fields: {
-                    'email': {
+                    'cnpj': {
                         validators: {
                             regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                regexp: /^\d{2}.\d{3}.\d{3}\/\d{4}-\d{2}$/,
                                 message: 'The value is not a valid email address',
                             },
                             notEmpty: {
                                 message: 'Email address is required'
-                            }
-                        }
-                    },
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'The password is required'
                             }
                         }
                     }
@@ -201,16 +194,25 @@ var KTSigninGeneral = function () {
     return {
         // Initialization
         init: function () {
-            form = document.querySelector('#kt_sign_in_form');
-            submitButton = document.querySelector('#kt_sign_in_submit');
-
-            handleValidation();
-
-            if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
-                handleSubmitAjax(); // use for ajax submit
-            } else {
-                handleSubmitDemo(); // used for demo purposes only
-            }
+            // form = document.querySelector('#kt_sign_in_form');
+            // submitButton = document.querySelector('#kt_sign_in_submit');
+            //
+            // handleValidation();
+            //
+            // if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
+            //     handleSubmitAjax(); // use for ajax submit
+            // } else {
+            //     handleSubmitDemo(); // used for demo purposes only
+            // }            // form = document.querySelector('#kt_sign_in_form');
+            // submitButton = document.querySelector('#kt_sign_in_submit');
+            //
+            // handleValidation();
+            //
+            // if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
+            //     handleSubmitAjax(); // use for ajax submit
+            // } else {
+            //     handleSubmitDemo(); // used for demo purposes only
+            // }
         }
     };
 }();

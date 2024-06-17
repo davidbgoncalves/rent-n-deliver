@@ -1,6 +1,6 @@
+@model RentNDeliver.Web.Areas.Register.Models.Home.Identity
 @{
-    ViewData["Title"] = "Authentication";
-    KTTheme.AddJavascriptFile("js/custom/register/index.js");
+    ViewData["Title"] = "Sign In";
 }
 
 <!--begin::Root-->
@@ -15,21 +15,12 @@
             <!--begin::Content-->
             <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                 <!--begin::Image-->
-                <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="assets/media/auth/agency.png" alt=""/>
-                <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="assets/media/auth/agency-dark.png" alt=""/>
+                <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="../assets/media/auth/agency.png" alt=""/>
+                <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20" src="../assets/media/auth/agency-dark.png" alt=""/>
                 <!--end::Image-->
                 <!--begin::Title-->
-                <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Fast, Efficient and Productive</h1>
+                <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Do you already have an account with us?</h1>
                 <!--end::Title-->
-                <!--begin::Text-->
-                <div class="text-gray-600 fs-base text-center fw-semibold">
-                    In this kind of post,
-                    <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>introduces a person they’ve interviewed
-                    <br/>and provides some background information about
-                    <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>and their
-                    <br/>work following this is a transcript of the interview.
-                </div>
-                <!--end::Text-->
             </div>
             <!--end::Content-->
         </div>
@@ -43,24 +34,21 @@
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
                         <!--begin::Form-->
-                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="">
+                        <form asp-controller="Home" asp-action="Index" method="post" id="kt_sign_in_form" novalidate="novalidate" class="form w-100">
+                            <div asp-validation-summary="ModelOnly"></div>
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3">Identity yourself</h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3">Identify yourself</h1>
                                 <!--end::Title-->
-                                <!--begin::Subtitle-->
-                                <div class="text-gray-500 fw-semibold fs-6">Do you already have an account with us?</div>
-                                <!--end::Subtitle=-->
                             </div>
                             <!--begin::Heading-->
-                            <!--begin::Input group=-->
+                            <!--begin::Input-->
                             <div class="fv-row mb-8">
-                                <!--begin::CNPJ-->
-                                <input type="text" placeholder="CNPJ" name="cnpj" autocomplete="off" class="form-control bg-transparent"/>
-                                <!--end::Email-->
+                                <input asp-for="Cnpj" placeholder="CNPJ only numbers" autocomplete="off" class="form-control bg-transparent"/>
+                                <span asp-validation-for="Cnpj" class="text-danger"></span>
                             </div>
-                            <!--end::Input group=-->
+                            <!--end::Input-->
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
                                 <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">

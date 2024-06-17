@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RentNDeliver.Domain.DeliveryPeople;
 
 namespace RentNDeliver.Infrastructure.Persistence.Repositories.DeliveryPeople;
@@ -10,11 +11,11 @@ public class DeliveryPeopleRepository : Repository<DeliveryPerson>, IDeliveryPeo
 
     public Task<DeliveryPerson?> GetByCnpjAsync(string cnpj, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return DbContext.DeliveryPeople.FirstOrDefaultAsync(x => x.Cnpj == cnpj, cancellationToken);
     }
 
     public Task<DeliveryPerson?> GetByCnhNumberAsync(string cnhNumber, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return DbContext.DeliveryPeople.FirstOrDefaultAsync(x => x.CnhNumber == cnhNumber, cancellationToken);
     }
 }

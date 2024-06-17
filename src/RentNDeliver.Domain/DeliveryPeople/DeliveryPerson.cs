@@ -5,7 +5,7 @@ namespace RentNDeliver.Domain.DeliveryPeople;
 
 public class DeliveryPerson : AggregateRoot
 {
-    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, DateTime createdAt, string? cnhImageUrl, DateTime? upDateAt)
+    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, DateTime createdAt, string? cnhImageUrl)
     {
         Name = name;
         Cnpj = cnpj;
@@ -13,6 +13,7 @@ public class DeliveryPerson : AggregateRoot
         CnhNumber = cnhNumber;
         CnhType = cnhType;
         CnhImageUrl = cnhImageUrl;
+        CreatedAt = createdAt;
     }
     
 #pragma warning disable CS8618 // this is needed for the ORM for serializing Value Objects
@@ -56,7 +57,9 @@ public class DeliveryPerson : AggregateRoot
         
         if(string.IsNullOrWhiteSpace(cnhNumber))
             return Result<DeliveryPerson>.Failure("CNH Number is required");
+
+        var createdAt = DateTime.UtcNow;
         
-        return Result<DeliveryPerson>.Success(new DeliveryPerson(name, cnpj, birthDate, cnhNumber, cnhType, DateTime.UtcNow, null, null));
+        return Result<DeliveryPerson>.Success(new DeliveryPerson(name, cnpj, birthDate, cnhNumber, cnhType, createdAt, null));
     }
 }
