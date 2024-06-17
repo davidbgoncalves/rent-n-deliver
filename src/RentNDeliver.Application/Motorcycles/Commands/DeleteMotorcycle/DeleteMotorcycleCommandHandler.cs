@@ -21,7 +21,9 @@ public class DeleteMotorcycleCommandHandler(
         if (motorcycleToBeDeleted == null)
             return Result.Failure("Motorcycle not found");
         
-        //TODO: validar se a moto ja teve alguma locação, caso sim, não poderá ser excluída
+        var hasBeenRented = await motorcycleRepository.HasBeenRentedAsync(motorcycleToBeDeleted.Id, cancellationToken);
+        if(hasBeenRented)
+            return Result.Failure("It is not possible delete a motorcycle that already was rented.");
         
         await motorcycleRepository.DeleteAsync(motorcycleToBeDeleted, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using RentNDeliver.Application.Abstractions.Messaging;
@@ -27,10 +28,16 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(1);
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
+    options.Cookie.Name = ".RentNDeliver.Session";
     options.Cookie.IsEssential = true;
 });
+
+// Adiciona a configuração de Data Protection com o novo caminho
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"/app/DataProtection-Keys"));
+
 
 var app = builder.Build();
 

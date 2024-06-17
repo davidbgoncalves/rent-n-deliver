@@ -27,9 +27,9 @@ public class MotorcycleRental
 
     public Guid Id { get; init; }
 
-    public string MotorcycleModel { get; init; }
+    public string MotorcycleModel { get; init; } = string.Empty;
 
-    public string MotorcycleLicensePlate { get; init; }
+    public string MotorcycleLicensePlate { get; init; } = string.Empty;
 
     public DateTime StartDate { get; init; }
     
@@ -42,8 +42,8 @@ public class MotorcycleRental
     public DateTime CreatedAt { get; init; }
     
     public DateTime? UpdatedAt { get; init; }
-    
-    public string RentalPlanName { get; init; }
+
+    public string RentalPlanName { get; init; } = string.Empty;
 
     public int RentalPlanMinimumDays { get; init; }
 

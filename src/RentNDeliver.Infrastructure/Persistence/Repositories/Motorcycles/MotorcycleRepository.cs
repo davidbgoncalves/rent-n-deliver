@@ -32,4 +32,11 @@ public class MotorcycleRepository : Repository<Motorcycle>, IMotorcycleRepositor
 
         return availableMotorcycles;
     }
+
+    public Task<bool> HasBeenRentedAsync(Guid motorcycleId, CancellationToken cancellationToken)
+    {
+        return DbContext
+            .MotorcycleRentals
+            .AnyAsync(x => x.MotorcycleId == motorcycleId, cancellationToken);
+    }
 }

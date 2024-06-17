@@ -19,26 +19,56 @@ public class RabbitMqConsumer(
         {
             var connection = connectionFactory.CreateConnection();
             var channel = connection.CreateModel();
+            
             channel.QueueDeclare(queue: "motorcycleQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
+            
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += async (model, ea) =>
             {
-                logger.LogInformation($"Message received at consumer");
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                var motorcycleCreatedEvent = JsonSerializer.Deserialize<MotorcycleCreatedEvent>(message);
-                if (motorcycleCreatedEvent == null)
+                bool messageProcessedSuccessfully = false;
+
+                try
                 {
-                    logger.LogInformation($"Message there is no content.");
-                    return;
+                    logger.LogInformation($"Message received at consumer");
+                    
+                    var body = ea.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
+                    var motorcycleCreatedEvent = JsonSerializer.Deserialize<MotorcycleCreatedEvent>(message);
+
+                    if (motorcycleCreatedEvent != null)
+                    {
+                        logger.LogInformation($"Message contains MotorcycleId:{motorcycleCreatedEvent.MotorcycleId}, Year {motorcycleCreatedEvent.Year}.");
+                        if (motorcycleCreatedEvent is { Year: 2024 })
+                        {
+                            await LogMotorcycleAsync(motorcycleCreatedEvent);
+                        }
+                    }
+                    else
+                    {
+                        logger.LogInformation($"Message there is no content.");
+                    }
+                    messageProcessedSuccessfully = true;
                 }
-                logger.LogInformation($"Message contains MotorcycleId:{motorcycleCreatedEvent.MotorcycleId}, Year {motorcycleCreatedEvent.Year}.");
-                if (motorcycleCreatedEvent is { Year: 2024 })
+                catch (Exception e)
                 {
-                    await LogMotorcycleAsync(motorcycleCreatedEvent);
+                    logger.LogError(e, "3 - Was not possible to process the message, occurred an unexpected error");
+                    Console.WriteLine(e);
                 }
+                finally
+                {
+                    if (messageProcessedSuccessfully)
+                    {
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                    }
+                    else
+                    {
+                        channel.BasicNack(deliveryTag: ea.DeliveryTag, multiple: false, requeue: true);
+                    }
+                }
+
             };
-            channel.BasicConsume(queue: "motorcycleQueue", autoAck: true, consumer: consumer);
+            
+            channel.BasicConsume(queue: "motorcycleQueue", autoAck: false, consumer: consumer);
         }
         catch (Exception e)
         {

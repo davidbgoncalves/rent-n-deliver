@@ -16,9 +16,8 @@ public class CreateMotorcycle
         Model = model;
         LicensePlate = licensePlate;
     }
-    
-    [Required] [Range(1885, 3000)] 
-    public int Year { get; init; }
+
+    [Required] [Range(1885, 3000)] public int Year { get; init; } = DateTime.UtcNow.Year;
     
     [Required]
     [StringLength(50)]

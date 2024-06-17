@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RentNDeliver.Application.Motorcycles.Queries.GetAvailableMotorcycleToRental;
 using RentNDeliver.Application.Rentals.Commands.RentMotorcycle;
+using RentNDeliver.Application.Rentals.Commands.ReturnMotorcycle;
 using RentNDeliver.Application.Rentals.Queries.GetAvailableRentalPlans;
 using RentNDeliver.Application.Rentals.Queries.GetMotorcycleRentalsByDeliveryPersonId;
 using RentNDeliver.Web.Areas.Delivery.Models.Rentals;
@@ -63,9 +64,30 @@ namespace RentNDeliver.Web.Areas.Delivery.Controllers
             return RedirectToAction(nameof(Index));
         }
         
-        public ActionResult Return()
+        public ActionResult Return([FromRoute]Guid id)
         {
-            return View();
+            var model = new ReturnMotorcycle
+            {
+                MotorcycleRentalId = id
+            };
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Return(ReturnMotorcycle model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await mediator.Send(new ReturnMotorcycleCommand(model.MotorcycleRentalId, model.ReturnDate));
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError("ReturnDate", result.Error);
+                return View(model);
+            }
+            
+            return RedirectToAction(nameof(Index));
         }
         
         private async Task<SelectList> GetRentalPlansSelectListItems()
