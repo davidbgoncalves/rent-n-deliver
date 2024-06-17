@@ -8,16 +8,14 @@
 
     <ItemGroup>
       <Folder Include="Areas\Admin\Views\Home\" />
-      <Folder Include="Areas\Delivery\Controllers\Account\" />
-      <Folder Include="Areas\Delivery\Controllers\Home\" />
-      <Folder Include="Areas\Delivery\Data\" />
-      <Folder Include="Areas\Delivery\Models\" />
+      <Folder Include="Areas\Delivery\Models\Account\" />
+      <Folder Include="Areas\Delivery\Models\Home\" />
       <Folder Include="Areas\Delivery\Views\Account\" />
       <Folder Include="Areas\Delivery\Views\Home\" />
+      <Folder Include="Areas\Delivery\Views\Rentals\" />
       <Folder Include="Areas\Register\Controllers\" />
       <Folder Include="Areas\Register\Views\Home\" />
       <Folder Include="Areas\Register\Views\NewAccount\" />
-      <Folder Include="_keenthemes\src\demo1\js\custom\delivery\" />
     </ItemGroup>
 
     <ItemGroup>

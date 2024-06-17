@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentNDeliver.Application.DeliveryPeople.Queries.GetDeliveryPersonByCNPJ;
 using RentNDeliver.Web.Areas.Register.Models.Home;
+using RentNDeliver.Web.Models;
 
 namespace RentNDeliver.Web.Areas.Register.Controllers
 {
@@ -25,6 +26,7 @@ namespace RentNDeliver.Web.Areas.Register.Controllers
             var deliveryPerson = await mediator.Send(new GetDeliveryPersonByCnpjQuery(model.Cnpj));
             if (deliveryPerson != null)
             {
+                HttpContext.Session.SetString(UserData.UserCNPJ, deliveryPerson.Cnpj);
                 return RedirectToAction("Index", "Home", new { area = "Delivery", cnpj = deliveryPerson.Cnpj });
             }
             else

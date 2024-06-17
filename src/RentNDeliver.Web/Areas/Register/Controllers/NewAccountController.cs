@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RentNDeliver.Application.DeliveryPeople.Commands.CreateDeliveryPerson;
 using RentNDeliver.Web.Areas.Register.Models.NewAccount;
+using RentNDeliver.Web.Models;
 
 namespace RentNDeliver.Web.Areas.Register.Controllers
 {
@@ -30,6 +31,7 @@ namespace RentNDeliver.Web.Areas.Register.Controllers
                 return View("Create", model);
             }
             
+            HttpContext.Session.SetString(UserData.UserCNPJ, model.Cnpj);
             return RedirectToAction("Index", "Home", new { area = "Delivery", cnpj = model.Cnpj});
         }
 
