@@ -14,7 +14,7 @@ public class CreateDeliveryPersonCommandHandler(
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        var deliveryPersonEntityResult = DeliveryPerson.Create(request.Name, request.Cnpj, request.Birthdate, request.CnhNumber, request.CnhType);
+        var deliveryPersonEntityResult = DeliveryPerson.Create(request.Name, request.Cnpj, request.Birthdate, request.CnhNumber, request.CnhType, request.ChnImageUrl);
         if (!deliveryPersonEntityResult.IsSuccess)
             return Result.Failure(deliveryPersonEntityResult.Error);
 

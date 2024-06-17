@@ -15,12 +15,18 @@ services:
       - RabbitMQ__UserName=rabbitmq
       - RabbitMQ__Password=#123Mudar
       - MongoDbSettings__DatabaseName=RentNDeliverDomainEventLogs
+      - MinioConfiguration__Endpoint=minio:9000
+      - MinioConfiguration__AccessKey=minioadmin
+      - MinioConfiguration__SecretKey=minioadmin
+      - MinioConfiguration__Bucket=delivery-people-documents
     depends_on:
       postgres:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
       mongodb:
+        condition: service_healthy
+      minio:
         condition: service_healthy
         
   postgres:
@@ -69,9 +75,21 @@ services:
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+      
 volumes:
-  keyring:
   postgres_data:
   rabbitmq_data:
   mongodb_data:
   mongodb_config:
+  minio-data:

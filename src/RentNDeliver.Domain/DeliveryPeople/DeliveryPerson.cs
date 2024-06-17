@@ -5,7 +5,7 @@ namespace RentNDeliver.Domain.DeliveryPeople;
 
 public class DeliveryPerson : AggregateRoot
 {
-    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, DateTime createdAt, string? cnhImageUrl)
+    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, DateTime createdAt, string cnhImageUrl)
     {
         Name = name;
         Cnpj = cnpj;
@@ -38,7 +38,7 @@ public class DeliveryPerson : AggregateRoot
         UpdatedAt = DateTime.UtcNow;
     }
     
-    public static Result<DeliveryPerson> Create(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType)
+    public static Result<DeliveryPerson> Create(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, string cnhImageUrl)
     {
         //In 1885 the first motorcycle in the world was manufactured.
         if (cnhType != "A"
@@ -60,6 +60,6 @@ public class DeliveryPerson : AggregateRoot
 
         var createdAt = DateTime.UtcNow;
         
-        return Result<DeliveryPerson>.Success(new DeliveryPerson(name, cnpj, birthDate, cnhNumber, cnhType, createdAt, null));
+        return Result<DeliveryPerson>.Success(new DeliveryPerson(name, cnpj, birthDate, cnhNumber, cnhType, createdAt, cnhImageUrl));
     }
 }

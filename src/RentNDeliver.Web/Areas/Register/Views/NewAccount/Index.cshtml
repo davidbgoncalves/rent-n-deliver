@@ -33,7 +33,7 @@
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
                         <!--begin::Form-->
-                        <form class="form w-100" id="kt_sign_in_form" asp-area="Register" asp-controller="NewAccount" asp-action="Index" method="post">
+                        <form class="form w-100" id="kt_sign_in_form" asp-area="Register" asp-controller="NewAccount" asp-action="Index" method="post" enctype="multipart/form-data">
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
@@ -107,6 +107,19 @@
                             </div>
                             <div class="form-group text-danger">
                                 <div asp-validation-summary="ModelOnly"></div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10 fv-row">
+                                <!--begin::Label-->
+                                <label class="required form-label">CNH Image</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div class="form-group">
+                                    <input type="file" asp-for="CnhImage" class="form-control" accept=".png,.bmp"/>
+                                    <span asp-validation-for="CnhImage" class="text-danger"></span>
+                                </div>
+                                <!--end::Input-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Submit button-->

@@ -8,4 +8,5 @@ public record CreateDeliveryPersonCommand(
     string Cnpj, 
     DateTime Birthdate, 
     string CnhNumber,
-    string CnhType) : ICommand<Result>;
+    string CnhType,
+    string ChnImageUrl) : ICommand<Result>;

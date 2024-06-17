@@ -13,6 +13,7 @@ using RentNDeliver.Infrastructure.Persistence.Repositories.DomainEventLogReposit
 using RentNDeliver.Infrastructure.Persistence.Repositories.Motorcycles;
 using RentNDeliver.Infrastructure.Persistence.Repositories.Rentals;
 using RentNDeliver.Infrastructure.Services.Messaging;
+using RentNDeliver.Infrastructure.Services.Storage;
 using RentNDeliver.Web;
 using RentNDeliver.Web._keenthemes;
 using RentNDeliver.Web._keenthemes.libs;
@@ -109,6 +110,10 @@ public partial class Program
             builder.Services.AddSingleton(new MongoDbContext(mongoConnectionString, mongoDatabaseName));
         else
             Console.WriteLine("MongoDbConnection is not available.");
+
+        var minioConfiguration = new MinioService.MinioConfiguration();
+        builder.Configuration.GetSection("MinioConfiguration").Bind(minioConfiguration);
+        builder.Services.AddSingleton(new MinioService(minioConfiguration));
         
         // Add services to the container.
         builder.Services.AddControllersWithViews();

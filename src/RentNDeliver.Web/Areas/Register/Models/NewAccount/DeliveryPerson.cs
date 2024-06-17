@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentNDeliver.Web.Areas.Register.Models.NewAccount;
 public class DeliveryPerson
@@ -30,4 +31,7 @@ public class DeliveryPerson
     [Required]
     [StringLength(2, MinimumLength = 1, ErrorMessage = "A, B or AB")]
     public string CnhType { get; init; } = string.Empty;
+
+    [NotMapped]
+    public IFormFile CnhImage { get; set; }
 }

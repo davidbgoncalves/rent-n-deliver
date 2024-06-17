@@ -14,9 +14,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = "1234567890";
             var cnhType = "A";
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.True(result.IsSuccess);
@@ -37,9 +38,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = "1234567890";
             var cnhType = "C"; // Invalid CNH Type
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -55,9 +57,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = DateTime.MinValue; // Invalid birthdate
             var cnhNumber = "1234567890";
             var cnhType = "A";
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -73,9 +76,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = "1234567890";
             var cnhType = "A";
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -91,9 +95,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = "1234567890";
             var cnhType = "A";
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -109,9 +114,10 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = ""; // Blank CNH Number
             var cnhType = "A";
+            string cnhImageUrl = "http://localh";
 
             // Act
-            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType);
+            var result = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl);
 
             // Assert
             Assert.False(result.IsSuccess);
@@ -127,7 +133,8 @@ namespace RentNDeliver.Domain.Tests.DeliveryPeople
             var birthDate = new DateTime(1990, 1, 1);
             var cnhNumber = "1234567890";
             var cnhType = "A";
-            var deliveryPerson = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType).Value;
+            string cnhImageUrl = "http://localh";
+            var deliveryPerson = DeliveryPerson.Create(name, cnpj, birthDate, cnhNumber, cnhType, cnhImageUrl).Value;
 
             var newCnhImageUrl = "http://example.com/cnh.jpg";
 
