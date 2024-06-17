@@ -12,7 +12,7 @@ Aplicação para gerenciar aluguel de motos e entregadores.
 
 ## Requisitos para rodar o projeto
 - .NET SDK 8.0
-- Docker 
+- Docker
 
 ## Configuração do Ambiente
 1. Clone o repositório:
@@ -20,10 +20,26 @@ Aplicação para gerenciar aluguel de motos e entregadores.
    git clone https://github.com/davidbgoncalves/rent-n-deliver.git
    cd rent-n-deliver
 
+2. Buildar a aplicacao no Docker 
+    ```sh
+    docker compose up --build .
 
-## Comandos para rodar os migrations
-1. Criação dos arquivos de Migrations 
-    dotnet ef migrations add Initial --project RentNDeliver.Infrastructure/RentNDeliver.Infrastructure.csproj --startup-project RentNDeliver.Web/RentNDeliver.Web.csproj --context RentNDeliver.Infrastructure.Persistence.RentNDeliverDbContext -v
-2. Rodar script no banco de dados
-   dotnet ef database update --project RentNDeliver.Infrastructure/RentNDeliver.Infrastructure.csproj --startup-project RentNDeliver.Web/RentNDeliver.Web.csproj --connection "Host=localhost:5432;Database=RentNDeliverDb;Username=postgres;Password=#123Mudar"
+3. Rode os migrations
+    ```ss
+   dotnet ef database update 
+   --project RentNDeliver.Infrastructure/RentNDeliver.Infrastructure.csproj 
+   --startup-project RentNDeliver.Web/RentNDeliver.Web.csproj 
+   --connection "Host=localhost:5432;Database=RentNDeliverDb;Username=postgres;Password=#123Mudar"
+
+4. Agora é so acessar a pagina inicial
+   http://localhost:8080
+
+## Utilizando a aplicação
+
+A página inicial vai te perguntar qual o seu perfil, se quiser simular o usuário admin, selecione a opcão Employee.
+
+Caso queira simular a aplicação como um entregador, só escolher a opção Customer.
+
+
+   
 
