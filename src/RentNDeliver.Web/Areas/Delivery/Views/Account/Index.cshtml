@@ -1,9 +1,145 @@
+@model RentNDeliver.Web.Areas.Delivery.Models.Account.DeliveryPerson
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Profile</h1>
-
-<p>Under construction</p>
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Edit Motorcycle</h1>
+                <!--end::Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a asp-area="Delivery" asp-controller="Home" asp-action="Index" class="text-muted text-hover-primary">Home</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <a asp-area="Delivery" asp-controller="Motorcycles" asp-action="Index" class="breadcrumb-item text-muted">My Account</a>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+        </div>
+        <!--end::Toolbar container-->
+    </div>
+    <!--end::Toolbar-->
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <form asp-controller="Motorcycles" asp-action="Edit" method="post" class="form d-flex flex-column flex-lg-row">
+            <div asp-validation-summary="ModelOnly"></div>
+            <!--begin::Main column-->
+            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                <!--begin::General options-->
+                <div class="card card-flush py-4">
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label class="form-label">ID</label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.Id)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="Name" class="form-label"></label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.Name)
+                                @Html.HiddenFor(model => model.Id)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="Cnpj" class="form-label"></label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.Cnpj)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="BirthDate" class="form-label"></label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.BirthDate)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="CnhNumber" class="form-label">Birthdate</label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.CnhNumber)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="CnhType" class="form-label">CNH Type</label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.CnhType)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="CreatedAt" class="form-label">Created Date</label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.CreatedAt)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-10 fv-row">
+                            <!--begin::Label-->
+                            <label asp-for="UpdatedAt" class="form-label">Last Update Date</label>
+                            <!--end::Label-->
+                            <div class="form-group">
+                                @Html.DisplayFor(model => model.UpdatedAt)
+                            </div>
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--end::Card header-->
+                </div>
+                <!--end::General options-->
+                <div class="d-flex justify-content-end">
+                </div>
+            </div>
+            <!--end::Main column-->
+        </form>
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->
 

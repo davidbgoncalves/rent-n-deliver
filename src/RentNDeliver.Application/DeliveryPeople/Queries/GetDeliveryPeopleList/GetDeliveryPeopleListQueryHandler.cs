@@ -18,7 +18,8 @@ public class GetDeliveryPeopleListQueryHandler(IDeliveryPeopleRepository deliver
                 deliveryPeoploDto.CnhNumber, 
                 deliveryPeoploDto.CnhType, 
                 deliveryPeoploDto.CreatedAt, 
-                deliveryPeoploDto.UpdatedAt))
+                deliveryPeoploDto.UpdatedAt,
+                deliveryPeoploDto.CnhImageUrl))
             .ToList();
 
         return deliveryPeoploListDtos;

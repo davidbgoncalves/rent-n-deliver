@@ -9,13 +9,14 @@ public class DeliveryPerson
         
     }
     
-    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType)
+    public DeliveryPerson(string name, string cnpj, DateTime birthDate, string cnhNumber, string cnhType, IFormFile cnhImage)
     {
         Name = name;
         Cnpj = cnpj;
         BirthDate = birthDate;
         CnhNumber = cnhNumber;
         CnhType = cnhType;
+        CnhImage = cnhImage;
     }
 
     [Required] public string Name { get; init; } = string.Empty;
@@ -32,6 +33,6 @@ public class DeliveryPerson
     [StringLength(2, MinimumLength = 1, ErrorMessage = "A, B or AB")]
     public string CnhType { get; init; } = string.Empty;
 
-    [NotMapped]
-    public IFormFile CnhImage { get; set; }
+    [NotMapped] 
+    public IFormFile CnhImage { get; set; } = null!;
 }

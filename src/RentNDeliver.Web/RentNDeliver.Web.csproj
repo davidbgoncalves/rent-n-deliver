@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Areas\Admin\Views\Home\" />
-      <Folder Include="Areas\Delivery\Models\Account\" />
       <Folder Include="Areas\Delivery\Models\Home\" />
       <Folder Include="Areas\Delivery\Views\Account\" />
       <Folder Include="Areas\Delivery\Views\Home\" />
